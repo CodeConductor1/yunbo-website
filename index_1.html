@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云博文书 — Academic Writing</title>
+<meta name="description" content="Academic English writing and editing for graduate applicants, researchers, and academic professionals. One consultant. Since 2019. No AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px; line-height: 1.6; color: #111; background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #111; text-decoration: none; }
+a:hover { color: #555; }
+a.nav-cta:hover, a.btn-rose:hover { color: #fff !important; }
+.cn { font-family: 'Noto Serif SC', serif; font-weight: 300; }
+
+:root { --rose: #B5706A; --rose-light: #F7EEEC; --rose-mid: #C98880; }
+
+[data-lang="en"] .zh { display: none !important; }
+[data-lang="zh"] .en { display: none !important; }
+
+.wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+}
+.nav-inner {
+  max-width: 700px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 500; color: #111; letter-spacing: -0.01em;
+}
+.nav-brand-sep { font-size: 13px; color: #ddd; font-weight: 300; }
+.nav-brand-en { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; }
+.nav-right { display: flex; gap: 6px; align-items: center; height: 52px; }
+.nav-links { display: flex; gap: 20px; list-style: none; align-items: center; margin-right: 14px; }
+.nav-links a { font-size: 14px; color: #666; transition: color 0.15s; line-height: 1; }
+.nav-links a:hover { color: #111; }
+.lang-toggle { display: flex; border: 1px solid #e5e5e5; border-radius: 4px; overflow: hidden; height: 28px; align-items: center; }
+.lang-btn { padding: 0 10px; font-size: 12px; font-weight: 500; color: #999; background: none; border: none; cursor: pointer; transition: all 0.15s; font-family: inherit; height: 28px; line-height: 28px; }
+.lang-btn.active { background: var(--rose); color: #fff; }
+.nav-cta { background: var(--rose); color: #fff !important; padding: 0 14px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-left: 8px; transition: background 0.15s; height: 28px; line-height: 28px; display: inline-flex; align-items: center; }
+.nav-cta:hover { background: #9d5f59 !important; color: #fff !important; }
+
+/* ── LOGO ── */
+.hero-logo { display: flex; justify-content: center; padding: 40px 0 0; }
+.hero-logo img { width: 100px; height: 100px; object-fit: contain; }
+
+/* ── HERO ── */
+.hero { padding: 24px 0 36px; }
+.hero h1 { font-size: 36px; font-weight: 500; line-height: 1.2; letter-spacing: -0.03em; color: #111; margin-bottom: 6px; }
+.hero-cn { font-size: 15px; color: #999; margin-bottom: 18px; letter-spacing: 0.04em; }
+.hero-sub { font-size: 16px; color: #444; line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
+.hero-btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; transition: all 0.15s; cursor: pointer; border: none; font-family: inherit; }
+.btn-rose { background: var(--rose); color: #fff; }
+.btn-rose:hover { background: #9d5f59; color: #fff; }
+.btn-light { background: #f5f5f5; color: #111; }
+.btn-light:hover { background: #e8e8e8; }
+
+/* ── ICON ROW ── */
+.icon-row {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin: 32px 0; padding: 16px 0;
+  border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;
+}
+.icon-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #555; }
+.icon-item svg { flex-shrink: 0; color: var(--rose-mid); }
+
+hr { border: none; border-top: 1px solid #eee; margin: 40px 0; }
+
+/* ── SECTIONS ── */
+.section h2 { font-size: 19px; font-weight: 500; color: #111; letter-spacing: -0.02em; margin-bottom: 14px; }
+.section h3 { font-size: 15px; font-weight: 500; color: #111; margin-bottom: 10px; }
+.section p { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 14px; max-width: 580px; }
+.section p:last-child { margin-bottom: 0; }
+
+/* ── SERVICES ── */
+.svc-list { display: flex; flex-direction: column; margin-top: 16px; }
+.svc-item { border-top: 1px solid #f0f0f0; }
+.svc-item:last-child { border-bottom: 1px solid #f0f0f0; }
+.svc-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; cursor: pointer; gap: 12px; }
+.svc-left { display: flex; align-items: center; gap: 10px; }
+.svc-icon { flex-shrink: 0; color: #ccc; transition: color 0.2s; }
+.svc-item.open .svc-icon { color: var(--rose-mid); }
+.svc-name { font-size: 14px; font-weight: 500; color: #111; }
+.svc-toggle-icon { flex-shrink: 0; width: 18px; height: 18px; border: 1px solid #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #ccc; }
+.svc-toggle-icon svg { transition: transform 0.25s; }
+.svc-item.open .svc-toggle-icon { border-color: var(--rose); color: var(--rose); }
+.svc-item.open .svc-toggle-icon svg { transform: rotate(45deg); }
+.svc-tiers { display: none; padding: 0 0 16px 25px; }
+.svc-item.open .svc-tiers { display: block; }
+.tier-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tier-table th { text-align: left; font-size: 11px; font-weight: 500; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; padding: 0 0 8px; border-bottom: 1px solid #f0f0f0; }
+.tier-table th:not(:first-child) { text-align: right; }
+.tier-table td { padding: 8px 0; color: #444; border-bottom: 1px solid #f8f8f8; font-size: 13px; }
+.tier-table td:not(:first-child) { text-align: right; color: #666; }
+.tier-table tr:last-child td { border-bottom: none; }
+.tier-desc { font-size: 12px; color: #999; margin-top: 2px; line-height: 1.5; }
+
+/* ── ADDITIONAL SERVICES ── */
+.add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #f0f0f0; border: 1px solid #f0f0f0; margin-top: 10px; }
+.add-item { background: #fff; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+.add-icon { color: #ccc; flex-shrink: 0; margin-top: 1px; }
+.add-name { font-size: 14px; font-weight: 500; color: #111; margin-bottom: 3px; }
+.add-desc { font-size: 12px; color: #888; line-height: 1.5; }
+.add-price { font-size: 12px; color: #666; margin-top: 4px; }
+
+/* ── TERMS (collapsible) ── */
+.terms-toggle {
+  display: flex; align-items: center; gap: 8px; margin-top: 20px;
+  font-size: 13px; color: #999; cursor: pointer; user-select: none;
+  background: none; border: none; font-family: inherit; padding: 0;
+  transition: color 0.15s;
+}
+.terms-toggle:hover { color: #555; }
+.terms-toggle svg { transition: transform 0.25s; color: #ccc; }
+.terms-toggle.open svg { transform: rotate(-180deg); }
+.terms-body {
+  display: none; margin-top: 10px; padding: 14px 16px;
+  background: #fafafa; border: 1px solid #f0f0f0; border-radius: 6px;
+  font-size: 13px; color: #666; line-height: 1.75;
+}
+.terms-body.open { display: block; }
+.terms-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.terms-row:last-child { margin-bottom: 0; }
+.terms-key { color: #aaa; width: 130px; flex-shrink: 0; font-size: 12px; }
+.terms-val { color: #555; }
+
+/* ── PACKAGES ── */
+.pkg-list { display: flex; flex-direction: column; gap: 1px; background: #f0f0f0; margin-top: 14px; border: 1px solid #f0f0f0; }
+.pkg-item { background: #fff; }
+.pkg-item.featured { background: var(--rose-light); }
+.pkg-summary {
+  padding: 16px 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.pkg-summary:hover .pkg-name { color: var(--rose); }
+.pkg-left { }
+.pkg-name { font-size: 15px; font-weight: 500; color: #111; transition: color 0.15s; margin-bottom: 3px; }
+.pkg-tagline { font-size: 13px; color: #888; }
+.pkg-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.pkg-price { font-size: 16px; font-weight: 500; color: #111; letter-spacing: -0.02em; }
+.pkg-save { font-size: 11px; color: var(--rose); font-weight: 500; white-space: nowrap; }
+.pkg-chevron { color: #ccc; transition: transform 0.25s, color 0.2s; flex-shrink: 0; }
+.pkg-item.open .pkg-chevron { transform: rotate(90deg); color: var(--rose); }
+.pkg-detail-body { display: none; padding: 0 20px 16px; }
+.pkg-item.open .pkg-detail-body { display: block; }
+.pkg-includes-list { font-size: 13px; color: #555; line-height: 1.9; border-top: 1px solid #eee; padding-top: 12px; list-style: none; }
+.pkg-includes-list li { display: flex; align-items: baseline; gap: 8px; }
+.pkg-includes-list li::before { content: '·'; color: var(--rose); flex-shrink: 0; }
+.pkg-badge { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--rose); background: #fff; padding: 2px 7px; border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+
+/* ── TESTIMONIALS ── */
+.testi-list { display: flex; flex-direction: column; gap: 0; margin-top: 4px; }
+.testi-item { padding: 20px 0; border-top: 1px solid #f0f0f0; }
+.testi-item:last-child { border-bottom: 1px solid #f0f0f0; }
+.testi-quote { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 10px; font-style: italic; }
+.testi-quote::before { content: '\201C'; color: var(--rose-mid); font-size: 18px; margin-right: 2px; }
+.testi-quote::after { content: '\201D'; color: var(--rose-mid); font-size: 18px; margin-left: 2px; }
+.testi-attr { font-size: 13px; color: #aaa; }
+.testi-attr strong { color: #666; font-weight: 500; }
+
+/* ── FACTS ── */
+.facts { display: flex; flex-direction: column; }
+.fact { display: flex; padding: 9px 0; border-bottom: 1px solid #f5f5f5; font-size: 14px; align-items: flex-start; }
+.fact:first-child { border-top: 1px solid #f5f5f5; }
+.fact-key { width: 140px; flex-shrink: 0; color: #aaa; font-size: 13px; display: flex; align-items: center; gap: 6px; padding-top: 1px; }
+.fact-key svg { color: var(--rose-mid); flex-shrink: 0; }
+.fact-val { color: #333; line-height: 1.5; }
+
+/* ── CONTACT FORM ── */
+.contact-form { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-label { font-size: 12px; font-weight: 500; color: #777; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-input { padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 14px; font-family: inherit; color: #111; outline: none; transition: border-color 0.15s; }
+.form-input:focus { border-color: var(--rose); }
+.form-input::placeholder { color: #ccc; }
+.form-checks { display: flex; flex-wrap: wrap; gap: 7px; }
+.check-input { display: none; }
+.check-label { padding: 5px 11px; border: 1px solid #e5e5e5; border-radius: 20px; font-size: 12px; color: #666; cursor: pointer; transition: all 0.15s; user-select: none; }
+.check-input:checked + .check-label { background: var(--rose); color: #fff; border-color: var(--rose); }
+.form-textarea { padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 14px; font-family: inherit; color: #111; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.15s; }
+.form-textarea:focus { border-color: var(--rose); }
+.form-textarea::placeholder { color: #ccc; }
+
+/* ── CONTACT CHANNELS ── */
+.contact-channels {
+  margin-top: 32px; padding-top: 28px; border-top: 1px solid #eee;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: #f0f0f0; border: 1px solid #f0f0f0;
+}
+.channel-item {
+  background: #fff; padding: 20px 18px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+}
+.channel-item img { margin-top: 2px; }
+.wechat-qr { width: 90px; height: 90px; border-radius: 4px; display: block; }
+.wechat-id { font-size: 15px; color: #111; font-weight: 500; letter-spacing: -0.01em; }
+.wechat-hint { font-size: 12px; color: #bbb; }
+.mobile-only { display: none; }
+@media (max-width: 600px) {
+  .wechat-qr { display: none; }
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+}
+.channel-icon svg { width: 22px; height: 22px; }
+.channel-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #bbb; }
+.channel-value { font-size: 15px; color: #111; font-weight: 500; letter-spacing: -0.01em; }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid #eee; background: #fafafa; }
+.footer-inner { max-width: 700px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.footer-text { font-size: 13px; color: #bbb; }
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { font-size: 13px; color: #bbb; transition: color 0.15s; }
+.footer-links a:hover { color: #555; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  .form-row { grid-template-columns: 1fr; }
+  .add-grid { grid-template-columns: 1fr; }
+  .contact-channels { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .icon-row { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span>云博文书</span>
+      <span class="nav-brand-sep">·</span>
+      <span class="nav-brand-en">Academic Writing</span>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#services"><span class="en">Services</span><span class="zh cn">服务</span></a></li>
+        <li><a href="#packages"><span class="en">Packages</span><span class="zh cn">套餐</span></a></li>
+        <li><a href="#about"><span class="en">About</span><span class="zh cn">关于</span></a></li>
+        <li><a href="#contact"><span class="en">Contact</span><span class="zh cn">联系</span></a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-l="en">EN</button>
+        <button class="lang-btn" data-l="zh">中文</button>
+      </div>
+      <a href="#contact" class="nav-cta">
+        <span class="en">Get in touch</span><span class="zh cn">联系我</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LOGO -->
+  <div class="hero-logo">
+    <img src="Untitled_Background_Removed.png" alt="云博文书 logo">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>
+      <span class="en">Academic English,<br>done properly.</span>
+      <span class="zh cn">学术英文，<br>认真写好。</span>
+    </h1>
+    <p class="hero-cn en">学术英文，认真写好</p>
+    <p class="hero-cn zh" style="font-family:inherit;color:#999;font-size:15px">Academic English, done properly.</p>
+    <p class="hero-sub">
+      <span class="en">Writing and editing for graduate applicants, researchers, and academic professionals — by one person, since 2019.</span>
+      <span class="zh cn">为研究生申请者、学术研究人员及专业人士提供英文写作与润色服务——由一人完成，自2019年起。</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-rose"><span class="en">Get in touch</span><span class="zh cn">联系我</span></a>
+      <a href="#services" class="btn btn-light"><span class="en">See services</span><span class="zh cn">了解服务</span></a>
+    </div>
+  </div>
+
+  <!-- ICON ROW -->
+  <div class="icon-row">
+    <div class="icon-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span class="en">No agency. One writer.</span><span class="zh cn">非中介，一位写手</span>
+    </div>
+    <div class="icon-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span class="en">Human-written. No AI.</span><span class="zh cn">真人撰写，不用AI</span>
+    </div>
+    <div class="icon-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="en">UK · US · EU · HK · SG · AU · NZ</span><span class="zh cn">英 · 美 · 欧 · 港 · 新 · 澳 · 新西兰</span>
+    </div>
+    <div class="icon-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="en">Est. 2019</span><span class="zh cn">创立于2019年</span>
+    </div>
+  </div>
+
+  <!-- THE WORK -->
+  <div class="section">
+    <h2><span class="en">The work</span><span class="zh cn">服务说明</span></h2>
+    <p>
+      <span class="en">云博文书 is a one-person academic writing consultancy. I work with graduate applicants writing personal statements and SOPs, researchers who need papers or dissertations edited for publication, PhD students preparing supervisor inquiry letters, and professionals who need academic English support of any kind.</span>
+      <span class="zh cn">云博文书是一家独立学术写作咨询工作室，由一人运营。服务对象包括：撰写个人陈述和目的陈述的研究生申请者、需要润色论文或毕业论文以供发表的研究人员、准备导师联系信的博士生，以及任何需要学术英文支持的专业人士。</span>
+    </p>
+    <p>
+      <span class="en">Every document is written by me personally. No AI tools are used at any stage — not for drafting, not for editing. No templates. No junior writers. You'll hear back from me directly — I aim to respond within 24 hours.</span>
+      <span class="zh cn">每份文书均由我本人亲自撰写，全程不使用AI工具，没有模板，没有初级写手。你将直接收到我的回复——我的目标是在24小时内回复。</span>
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- SERVICES -->
+  <div class="section" id="services">
+    <h2><span class="en">Services</span><span class="zh cn">服务范围</span></h2>
+    <p><span class="en">Every document is available at three tiers — click any service to see the breakdown.</span><span class="zh cn">每类文书均提供三种服务层级——点击查看详情。</span></p>
+
+    <div class="svc-list">
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="svc-name"><span class="en">Personal Statement / SOP</span><span class="zh cn">个人陈述 / 目的陈述</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong><div class="tier-desc"><span class="en">Language corrections on your draft</span><span class="zh cn">语法、词汇、行文润色</span></div></td><td>¥1,500</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong><div class="tier-desc"><span class="en">Full structural and language editing</span><span class="zh cn">结构重组与语言全面润色</span></div></td><td>¥2,500</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong><div class="tier-desc"><span class="en">From scratch — intake, outline, complete draft</span><span class="zh cn">从零开始——采集、大纲、全文撰写</span></div></td><td>¥4,500</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="svc-name"><span class="en">Reference Letters</span><span class="zh cn">推荐信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong><div class="tier-desc"><span class="en">Language corrections on a supplied draft</span><span class="zh cn">对已有初稿进行语言润色</span></div></td><td>¥600</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong><div class="tier-desc"><span class="en">Structural and language rework</span><span class="zh cn">结构与语言全面改写</span></div></td><td>¥1,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong><div class="tier-desc"><span class="en">Written from intake — sounds like the signatory</span><span class="zh cn">从资料采集到成稿，文风贴合推荐人</span></div></td><td>¥1,200 / <span class="en">letter</span><span class="zh cn">封</span></td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span class="svc-name"><span class="en">Academic CV</span><span class="zh cn">学术简历</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong></td><td>¥600</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong></td><td>¥1,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong></td><td>¥1,200</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="svc-name"><span class="en">Motivation Letter</span><span class="zh cn">动机信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong></td><td>¥1,200</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong></td><td>¥2,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong></td><td>¥3,500</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="svc-name"><span class="en">Statement of Research Interest</span><span class="zh cn">研究兴趣陈述</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong></td><td>¥1,200</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong></td><td>¥2,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong></td><td>¥3,800</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span class="svc-name"><span class="en">Supervisor Inquiry Letter</span><span class="zh cn">导师联系信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh cn">层级</span></th><th><span class="en">Price</span><span class="zh cn">价格</span></th><th><span class="en">Revisions</span><span class="zh cn">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh cn">润色</span></strong></td><td>¥500</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh cn">重写</span></strong></td><td>¥800</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh cn">全程写作</span></strong></td><td>¥1,000 / <span class="en">letter</span><span class="zh cn">封</span></td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span class="svc-name"><span class="en">Paper &amp; Dissertation Editing</span><span class="zh cn">论文润色</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <p style="font-size:13px;color:#555;line-height:1.65;margin-bottom:12px">
+            <span class="en">Journal papers, dissertation chapters, research proposals — edited for language, academic register, and argument flow. Priced by length and complexity.</span>
+            <span class="zh cn">期刊论文、毕业论文章节、研究计划——针对语言、学术语体及论证逻辑进行润色。按篇幅与复杂程度定价。</span>
+          </p>
+          <a href="#contact" class="btn btn-light" style="font-size:13px;padding:7px 14px"><span class="en">Enquire for a quote</span><span class="zh cn">询价</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:28px"><span class="en">Additional services</span><span class="zh cn">附加服务</span></h3>
+    <div class="add-grid">
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Programme Selection</span><span class="zh cn">选校咨询</span></div>
+          <div class="add-desc"><span class="en">Shortlist of up to 8 institutions with written rationale</span><span class="zh cn">最多8所院校精选名单，附书面分析</span></div>
+          <div class="add-price">¥3,000</div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Mock Interview</span><span class="zh cn">模拟面试</span></div>
+          <div class="add-desc"><span class="en">60–90 min — admissions and PhD supervisor meetings</span><span class="zh cn">60–90分钟，适用于录取面试及导师会面</span></div>
+          <div class="add-price">¥2,000 / <span class="en">session</span><span class="zh cn">次</span></div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Online Application Support</span><span class="zh cn">网申辅导</span></div>
+          <div class="add-desc"><span class="en">Portal completion, supplementary statements, referee guidance</span><span class="zh cn">系统填写、附加文书、推荐人提交指导</span></div>
+          <div class="add-price">¥1,500 / <span class="en">school</span><span class="zh cn">所</span></div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div>
+          <div class="add-name"><span class="en">English Language Tutoring</span><span class="zh cn">英语辅导</span></div>
+          <div class="add-desc"><span class="en">Academic writing, exam preparation, or professional English for students or researchers</span><span class="zh cn">学术写作、考试备考，或面向学生及研究人员的职业英语</span></div>
+          <div class="add-price"><span class="en">Enquire for rates</span><span class="zh cn">询价</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="terms-toggle" onclick="toggleTerms(this)">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 4.5 6 7.5 9 4.5"/></svg>
+      <span class="en">Terms &amp; notes</span><span class="zh cn">条款说明</span>
+    </button>
+    <div class="terms-body">
+      <div class="terms-row"><span class="terms-key"><span class="en">Rush orders</span><span class="zh cn">加急服务</span></span><span class="terms-val"><span class="en">First draft in 3 business days: +50%, subject to availability</span><span class="zh cn">3个工作日初稿：加收50%，视档期而定</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Extra revisions</span><span class="zh cn">额外修改</span></span><span class="terms-val"><span class="en">Beyond rounds included: ¥400 per round</span><span class="zh cn">超出包含轮次：每轮¥400</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Full upfront</span><span class="zh cn">全额预付</span></span><span class="terms-val"><span class="en">Pay in full before work begins: 5% discount</span><span class="zh cn">开始前全额付款：95折</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Deposit</span><span class="zh cn">定金</span></span><span class="terms-val"><span class="en">50% to begin · balance due before final revision</span><span class="zh cn">50%定金开始 · 最终修改前结清余款</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Referral</span><span class="zh cn">推荐奖励</span></span><span class="terms-val"><span class="en">¥500 cash reward for referring a new paying client</span><span class="zh cn">成功推荐新客户可获¥500现金奖励</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Payment</span><span class="zh cn">付款方式</span></span><span class="terms-val">WeChat Pay · Alipay · Revolut · Wise</span></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PACKAGES -->
+  <div class="section" id="packages">
+    <h2><span class="en">Packages</span><span class="zh cn">套餐服务</span></h2>
+    <p><span class="en">The most commonly requested documents bundled together at a discount. All Full Writing tier. Click any package to see what's included.</span><span class="zh cn">将最常用的文书组合打包，享受折扣。均为全程写作层级，点击查看详情。</span></p>
+
+    <div class="pkg-list">
+      <div class="pkg-item">
+        <div class="pkg-summary" onclick="togglePkg(this)">
+          <div class="pkg-left">
+            <div class="pkg-name"><span class="en">Writing Bundle</span><span class="zh cn">写作套餐</span></div>
+            <div class="pkg-tagline"><span class="en">The essentials for a graduate application</span><span class="zh cn">研究生申请的核心文书</span></div>
+          </div>
+          <div class="pkg-right">
+            <span class="pkg-save"><span class="en">save 15%</span><span class="zh cn">省15%</span></span>
+            <span class="pkg-price">¥6,200</span>
+            <svg class="pkg-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="pkg-detail-body">
+          <ul class="pkg-includes-list">
+            <li><span class="en">1× Personal Statement — Full Writing</span><span class="zh cn">1份 个人陈述（全程写作）</span></li>
+            <li><span class="en">1× Academic CV — Full Writing</span><span class="zh cn">1份 学术简历（全程写作）</span></li>
+            <li><span class="en">2× Reference Letters — Full Writing</span><span class="zh cn">2封 推荐信（全程写作）</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pkg-item featured">
+        <div class="pkg-summary" onclick="togglePkg(this)">
+          <div class="pkg-left">
+            <div class="pkg-name">
+              <span class="en">Full File<span class="pkg-badge">Popular</span></span>
+              <span class="zh cn">完整档案<span class="pkg-badge">热门</span></span>
+            </div>
+            <div class="pkg-tagline"><span class="en">Complete documentation plus school selection</span><span class="zh cn">完整文书加选校咨询</span></div>
+          </div>
+          <div class="pkg-right">
+            <span class="pkg-save"><span class="en">save 18%</span><span class="zh cn">省18%</span></span>
+            <span class="pkg-price">¥10,500</span>
+            <svg class="pkg-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="pkg-detail-body">
+          <ul class="pkg-includes-list">
+            <li><span class="en">1× Personal Statement</span><span class="zh cn">1份 个人陈述</span></li>
+            <li><span class="en">1× Motivation Letter</span><span class="zh cn">1份 动机信</span></li>
+            <li><span class="en">1× Academic CV</span><span class="zh cn">1份 学术简历</span></li>
+            <li><span class="en">2× Reference Letters</span><span class="zh cn">2封 推荐信</span></li>
+            <li><span class="en">Programme Selection (up to 8 schools)</span><span class="zh cn">选校咨询（最多8所）</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pkg-item">
+        <div class="pkg-summary" onclick="togglePkg(this)">
+          <div class="pkg-left">
+            <div class="pkg-name"><span class="en">Complete</span><span class="zh cn">全套服务</span></div>
+            <div class="pkg-tagline"><span class="en">Full doctoral application suite</span><span class="zh cn">完整博士申请文书套餐</span></div>
+          </div>
+          <div class="pkg-right">
+            <span class="pkg-save"><span class="en">save 20%</span><span class="zh cn">省20%</span></span>
+            <span class="pkg-price">¥16,500</span>
+            <svg class="pkg-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="pkg-detail-body">
+          <ul class="pkg-includes-list">
+            <li><span class="en">1× SOP / Personal Statement</span><span class="zh cn">1份 目的陈述</span></li>
+            <li><span class="en">1× Statement of Research Interest</span><span class="zh cn">1份 研究兴趣陈述</span></li>
+            <li><span class="en">1× Academic CV</span><span class="zh cn">1份 学术简历</span></li>
+            <li><span class="en">2× Reference Letters</span><span class="zh cn">2封 推荐信</span></li>
+            <li><span class="en">3× Supervisor Inquiry Letters</span><span class="zh cn">3封 导师联系信</span></li>
+            <li><span class="en">Programme Selection</span><span class="zh cn">选校咨询</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <h2><span class="en">About</span><span class="zh cn">关于我</span></h2>
+    <p>
+      <span class="en">I am a writing consultant affiliated with a QS top-60 research university as staff and alumni. Since 2019 I have worked with clients applying to and working within universities across the US, UK, Europe, Asia, and Oceania.</span>
+      <span class="zh cn">我是一位学术写作顾问，以员工及校友身份隶属一所QS前60研究型大学。自2019年起，我持续服务于赴美国、英国、欧洲、亚洲及大洋洲各高校申请或就读的客户。</span>
+    </p>
+    <p>
+      <span class="en">All work is conducted in English, which ensures clarity and precision throughout the writing process.</span>
+      <span class="zh cn">所有工作均以英文进行，确保写作过程中的清晰度与准确性。</span>
+    </p>
+    <p>
+      <span class="en">Every document is written by me. One person, responsible for the work from first message to final delivery.</span>
+      <span class="zh cn">每份文书均由我本人亲自撰写。一个人，从第一条消息到最终交付，全程负责。</span>
+    </p>
+    <div class="facts" style="margin-top:20px">
+      <div class="fact">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="en">Scope</span><span class="zh cn">覆盖范围</span></span>
+        <span class="fact-val"><span class="en">UK · US · EU · HK · SG · AU · NZ</span><span class="zh cn">英国 · 美国 · 欧洲 · 香港 · 新加坡 · 澳大利亚 · 新西兰</span></span>
+      </div>
+      <div class="fact">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Written by</span><span class="zh cn">撰写方式</span></span>
+        <span class="fact-val"><span class="en">One person. Every document. No AI.</span><span class="zh cn">由一人完成每份文书，不使用AI。</span></span>
+      </div>
+      <div class="fact">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="en">Since</span><span class="zh cn">成立时间</span></span>
+        <span class="fact-val">2019</span>
+      </div>
+      <div class="fact">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="en">Deposit</span><span class="zh cn">定金</span></span>
+        <span class="fact-val"><span class="en">50% to begin · balance before final revision</span><span class="zh cn">50%定金开始 · 最终修改前结清余款</span></span>
+      </div>
+      <div class="fact">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span class="en">Payment</span><span class="zh cn">付款方式</span></span>
+        <span class="fact-val">WeChat Pay · Alipay · Revolut · Wise</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <h2><span class="en">Get in touch</span><span class="zh cn">联系我</span></h2>
+    <p><span class="en">Reach out with a brief description of what you need. I aim to respond within 24 hours.</span><span class="zh cn">简要描述你的需求，我将在24小时内回复。</span></p>
+
+    <form class="contact-form" action="https://formspree.io/f/YOURFORMID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><span class="en">Name</span><span class="zh cn">姓名</span></label>
+          <input class="form-input" type="text" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Email</span><span class="zh cn">邮箱</span></label>
+          <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><span class="en">What do you need?</span><span class="zh cn">你需要什么？</span></label>
+        <div class="form-checks">
+          <input class="check-input" type="checkbox" id="c1" name="service" value="Personal Statement"><label class="check-label" for="c1"><span class="en">Personal Statement</span><span class="zh cn">个人陈述</span></label>
+          <input class="check-input" type="checkbox" id="c2" name="service" value="Reference Letters"><label class="check-label" for="c2"><span class="en">Reference Letters</span><span class="zh cn">推荐信</span></label>
+          <input class="check-input" type="checkbox" id="c3" name="service" value="Academic CV"><label class="check-label" for="c3"><span class="en">Academic CV</span><span class="zh cn">学术简历</span></label>
+          <input class="check-input" type="checkbox" id="c4" name="service" value="Motivation Letter"><label class="check-label" for="c4"><span class="en">Motivation Letter</span><span class="zh cn">动机信</span></label>
+          <input class="check-input" type="checkbox" id="c5" name="service" value="Research Proposal"><label class="check-label" for="c5"><span class="en">Research Proposal</span><span class="zh cn">研究计划</span></label>
+          <input class="check-input" type="checkbox" id="c6" name="service" value="Paper or Dissertation"><label class="check-label" for="c6"><span class="en">Paper / Dissertation</span><span class="zh cn">论文润色</span></label>
+          <input class="check-input" type="checkbox" id="c7" name="service" value="Tutoring"><label class="check-label" for="c7"><span class="en">Tutoring</span><span class="zh cn">英语辅导</span></label>
+          <input class="check-input" type="checkbox" id="c8" name="service" value="Mock Interview"><label class="check-label" for="c8"><span class="en">Mock Interview</span><span class="zh cn">模拟面试</span></label>
+          <input class="check-input" type="checkbox" id="c9" name="service" value="Send me the service guide"><label class="check-label" for="c9"><span class="en">Send me the service guide</span><span class="zh cn">发送服务指南</span></label>
+          <input class="check-input" type="checkbox" id="c10" name="service" value="Other"><label class="check-label" for="c10"><span class="en">Other</span><span class="zh cn">其他</span></label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+          <span class="en">Briefly describe your situation <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></span>
+          <span class="zh cn">简要描述你的情况 <span style="font-weight:400;color:#bbb">（选填）</span></span>
+        </label>
+        <textarea class="form-textarea" name="message" placeholder="Where are you in the process? What do you need and when?"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-rose"><span class="en">Send message</span><span class="zh cn">发送信息</span></button>
+      </div>
+    </form>
+
+    <div class="contact-channels">
+      <div class="channel-item">
+        <div class="channel-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 11C11.433 11 13 9.433 13 7.5C13 5.567 11.433 4 9.5 4C7.567 4 6 5.567 6 7.5C6 9.433 7.567 11 9.5 11Z" stroke="#ccc" stroke-width="1.5"/>
+            <path d="M16.5 10C17.881 10 19 8.881 19 7.5C19 6.119 17.881 5 16.5 5C15.119 5 14 6.119 14 7.5C14 8.881 15.119 10 16.5 10Z" stroke="#ccc" stroke-width="1.5"/>
+            <path d="M2 17.5C2 14.462 5.358 12 9.5 12C13.642 12 17 14.462 17 17.5V18H2V17.5Z" stroke="#ccc" stroke-width="1.5"/>
+            <path d="M17 15C18.5 15 21 15.8 21 17.5V18H17" stroke="#ccc" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="channel-label"><span class="en">Add me on WeChat</span><span class="zh cn">加我微信</span></div>
+        <img src="wechat_qr.png" alt="WeChat QR code" class="wechat-qr">
+        <div class="wechat-id">yunbo-wenshu</div>
+        <div class="wechat-hint desktop-only"><span class="en">Scan to add</span><span class="zh cn">扫码添加</span></div>
+        <div class="wechat-hint mobile-only"><span class="en">Search ID on WeChat</span><span class="zh cn">微信搜索添加</span></div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="channel-label"><span class="en">Email me</span><span class="zh cn">给我发电邮</span></div>
+        <div class="channel-value" style="font-size:13px">info@yunbowenshu.com</div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="#ccc" stroke-width="1.5"/>
+            <path d="M8 8h3v3H8zM13 8h3v3h-3z" fill="#ccc"/>
+            <path d="M8 13h8v1.5H8z" fill="#ccc"/>
+            <path d="M9.5 14.5v2.5M14.5 14.5v2.5" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="channel-label"><span class="en">Find me on 小红书</span><span class="zh cn">在小红书找我</span></div>
+        <div class="channel-value">云博文书</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">云博文书 · ACADEMIC WRITING · 2019–2026</span>
+    <div class="footer-links">
+      <a href="#services"><span class="en">Services</span><span class="zh cn">服务</span></a>
+      <a href="#packages"><span class="en">Packages</span><span class="zh cn">套餐</span></a>
+      <a href="#about"><span class="en">About</span><span class="zh cn">关于</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="zh cn">联系</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Language toggle
+const html = document.documentElement;
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const l = btn.dataset.l;
+    html.dataset.lang = l;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.l === l));
+  });
+});
+
+// Service toggle
+function toggleSvc(header) {
+  const item = header.closest('.svc-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.svc-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Package toggle
+function togglePkg(summary) {
+  const item = summary.closest('.pkg-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.pkg-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Terms toggle
+function toggleTerms(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
