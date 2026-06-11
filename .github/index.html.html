@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="zh" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云博文书 · Academic Writing</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS configuration ──────────────────────────────────────────
+  // 1. Sign up at https://emailjs.com (free)
+  // 2. Add a Gmail service → copy Service ID below
+  // 3. Create two templates (see comments) → copy Template IDs below
+  // 4. Copy your Public Key from Account → API Keys
+  var EMAILJS_PUBLIC_KEY   = 'NrVawF784jSLGS3KC';       // e.g. 'abc123XYZ'
+  var EMAILJS_SERVICE_ID   = 'service_ovh0lrj';       // e.g. 'service_xxxxxx'
+  var EMAILJS_TEMPLATE_YOU = 'template_6hw03ve';  // template that mails YOU with client details
+  var EMAILJS_TEMPLATE_ACK = 'template_2rvxy0n';     // template that auto-replies to the CLIENT
+  // ──────────────────────────────────────────────────────────────────
+  (function(){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); })();
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+:root {
+  --amber:#8C5A6E; --amber-dark:#6e4356; --amber-light:#F7EFF3; --amber-mid:#a87080; --amber-glow:rgba(140,90,110,0.22);
+  --mauve:#6B52A0; --mauve-light:#F5EFF8; --mauve-glow:rgba(107,82,160,0.14);
+  --indigo:#2D3A7A; --indigo-light:#EBF0FA; --indigo-glow:rgba(45,58,122,0.13);
+  --text:#1a1a2e; --text-mid:#444; --text-muted:#888;
+  --border:#ebebeb; --border-mid:#e0e0e0; --max-w:700px;
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1); --ease-out:cubic-bezier(0.22,1,0.36,1);
+}
+body { font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.7; color:var(--text); background:#fff; -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-top:54px; }
+a { color:var(--text); text-decoration:none; transition:color 0.15s; }
+[data-lang="en"] .zh { display:none !important; }
+[data-lang="zh"] .en { display:none !important; }
+.wrap { max-width:var(--max-w); margin:0 auto; padding:0 24px; width:100%; }
+.navbar { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(0,0,0,0.06); transition:box-shadow 0.2s; }
+.navbar.scrolled { box-shadow:0 4px 24px rgba(45,58,122,0.09); }
+.nav-inner { max-width:960px; margin:0 auto; padding:0 28px; min-height:54px; display:flex; align-items:center; justify-content:space-between; width:100%; flex-wrap:nowrap; }
+.nav-brand { font-size:15px; font-weight:500; color:var(--indigo); text-decoration:none; white-space:nowrap; display:flex; align-items:baseline; gap:6px; }
+.nav-brand-sep { font-size:13px; color:#ccc; flex-shrink:0; }
+.nav-brand-sub { font-size:13px; font-weight:400; color:#bbb; letter-spacing:0.1em; text-transform:uppercase; flex-shrink:0; }
+
+.nav-right { display:flex; align-items:center; gap:2px; flex-shrink:0; }
+.nav-links { display:flex; list-style:none; align-items:center; margin-right:8px; flex-shrink:1; }
+.nav-links a { font-size:12px; color:var(--text-muted); padding:6px 8px; border-radius:5px; transition:color 0.15s,background 0.15s; white-space:nowrap; display:block; }
+.nav-links a:hover { color:var(--text); background:rgba(0,0,0,0.03); }
+.lang-toggle { display:flex; background:#f0f0f0; border-radius:8px; padding:3px; align-items:center; flex-shrink:0; }
+.lang-btn { padding:4px 10px; font-size:12px; font-weight:500; color:#999; background:none; border:none; cursor:pointer; border-radius:6px; transition:all 0.18s; font-family:inherit; white-space:nowrap; }
+.lang-btn.active { background:#fff; color:var(--amber); box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+.nav-cta { background:linear-gradient(135deg,#2D3A7A 0%,#8C5A6E 100%); color:#fff !important; padding:0 18px; border-radius:100px; font-size:13px; font-weight:500; margin-left:10px; height:34px; line-height:34px; display:inline-flex; align-items:center; white-space:nowrap; transition:transform 0.18s,box-shadow 0.18s,filter 0.18s; box-shadow:0 2px 10px rgba(140,90,110,0.28); }
+.nav-cta:hover { transform:translateY(-1px); box-shadow:0 5px 16px rgba(140,90,110,0.36); filter:brightness(1.08); }
+.hero-logo { display:flex; justify-content:center; padding:40px 0 0; }
+.hero-logo img { width:220px; height:auto; }
+.hero { padding:24px 0 36px; }
+.hero h1 { font-size:36px; font-weight:500; line-height:1.18; letter-spacing:-0.03em; color:var(--indigo); margin-bottom:6px; }
+.hero h1 .zh { font-family:'Noto Serif SC',serif; font-weight:500; }
+[data-lang="en"] .hero h1 { font-family:Georgia,'Times New Roman',serif; }
+.hero-cn { font-size:15px; color:var(--text-muted); margin-bottom:18px; }
+.hero-sub { font-size:16px; color:var(--text-mid); line-height:1.85; margin-bottom:28px; }
+.hero-btns { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:7px; padding:12px 28px; border-radius:8px; font-size:15px; font-weight:500; cursor:pointer; border:none; font-family:inherit; transition:background 0.18s,transform 0.2s var(--ease-spring),box-shadow 0.2s; -webkit-appearance:none; appearance:none; }
+.btn-rose::before, .nav-cta::before, .sticky-cta a::before {
+  content:''; position:absolute; inset:0; border-radius:inherit;
+  background:radial-gradient(circle 80px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.18), transparent 70%);
+  opacity:0; transition:opacity 0.2s; pointer-events:none;
+}
+.btn-rose:hover::before, .nav-cta:hover::before { opacity:1; }
+.btn-rose { background:linear-gradient(135deg,#2D3A7A 0%,#8C5A6E 100%) !important; color:#fff !important; box-shadow:0 3px 14px rgba(140,90,110,0.28); border-radius:100px !important; position:relative; overflow:hidden; -webkit-appearance:none; appearance:none; }
+.btn-rose:hover { color:#fff; transform:translateY(-2px); box-shadow:0 8px 24px rgba(140,90,110,0.38); filter:brightness(1.08); }
+.btn-light { background:transparent; color:var(--indigo); border:1.5px solid rgba(45,58,122,0.25); }
+.btn-light:hover { background:var(--indigo-light); border-color:var(--indigo); transform:translateY(-1px); }
+.btn-submit { padding:14px 36px; font-size:15px; width:100%; justify-content:center; }
+@media(min-width:601px){ .btn-submit { width:auto; } }
+.icon-row { display:grid; grid-template-columns:repeat(3,1fr); margin:32px 0; padding:16px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.icon-item { display:flex; align-items:center; justify-content:center; gap:7px; font-size:13px; color:var(--text-mid); }
+.icon-item svg { flex-shrink:0; color:var(--amber-mid); }
+hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
+.section { scroll-margin-top:70px; }
+.section h2 { font-family:'Noto Serif SC',serif; font-weight:500; font-size:19px; color:var(--indigo); margin-bottom:14px; position:relative; display:inline-block; padding-bottom:10px; }
+.section h2::after { content:''; position:absolute; bottom:0; left:0; width:32px; height:2px; background:linear-gradient(90deg,var(--amber),var(--mauve)); border-radius:1px; transition:width 0.3s var(--ease-out); }
+.section h2:hover::after { width:100%; }
+.section h3 { font-size:15px; font-weight:500; color:var(--text); margin-bottom:10px; }
+.section p { font-size:16px; color:var(--text-mid); line-height:1.85; margin-bottom:14px; }
+.svc-list { display:flex; flex-direction:column; margin-top:16px; }
+.svc-item { border-top:1px solid var(--border); transition:background 0.18s; position:relative; }
+.svc-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--amber),var(--mauve)); transform:scaleY(0); transform-origin:center; transition:transform 0.22s var(--ease-spring); border-radius:0 2px 2px 0; }
+.svc-item:last-child { border-bottom:1px solid var(--border); }
+.svc-item:hover { background:var(--amber-light); }
+.svc-item:hover::before { transform:scaleY(1); }
+.svc-header { display:flex; align-items:center; justify-content:space-between; padding:13px 0 13px 10px; cursor:pointer; gap:12px; }
+.svc-left { display:flex; align-items:center; gap:10px; }
+.svc-icon { flex-shrink:0; color:#ccc; transition:color 0.2s; }
+.svc-item.open .svc-icon, .svc-item:hover .svc-icon { color:var(--amber); }
+.svc-name { font-size:14px; font-weight:500; color:var(--text); }
+.svc-toggle-icon { flex-shrink:0; width:18px; height:18px; border:1px solid var(--border-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.2s; color:#ccc; }
+.svc-toggle-icon svg { transition:transform 0.25s; }
+.svc-item.open .svc-toggle-icon { border-color:var(--amber); color:var(--amber); }
+.svc-item.open .svc-toggle-icon svg { transform:rotate(45deg); }
+.svc-tiers { display:none; padding:0 0 16px 35px; }
+.svc-item.open .svc-tiers { display:block; }
+.tier-table { width:100%; border-collapse:collapse; font-size:13px; }
+.tier-table th { text-align:left; font-size:11px; font-weight:500; color:#aaa; text-transform:uppercase; letter-spacing:0.06em; padding:0 8px 8px 0; border-bottom:1px solid var(--border); }
+.tier-table th:not(:first-child) { text-align:right; padding-left:16px; }
+.tier-table th:last-child { width:70px; text-align:center; }
+.tier-table td { padding:8px 8px 8px 0; color:var(--text-mid); border-bottom:1px solid #f8f8f8; font-size:13px; }
+.tier-table td:not(:first-child) { text-align:right; color:var(--text-muted); padding-left:16px; }
+.tier-table td:last-child { width:70px; text-align:center; }
+.tier-table tr:last-child td { border-bottom:none; }
+.tier-desc { font-size:12px; color:var(--text-muted); margin-top:2px; line-height:1.5; }
+.add-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-top:10px; }
+.add-item { background:#fff; padding:14px 16px; display:flex; align-items:flex-start; gap:10px; transition:background 0.18s; }
+.add-item:hover { background:var(--amber-light); }
+.add-icon { color:#ccc; flex-shrink:0; margin-top:1px; transition:color 0.18s; }
+.add-item:hover .add-icon { color:var(--amber); }
+.add-name { font-size:14px; font-weight:500; color:var(--text); margin-bottom:3px; }
+.add-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
+.add-price { font-size:12px; color:var(--text-mid); margin-top:4px; }
+.terms-toggle { display:flex; align-items:center; gap:8px; margin-top:20px; font-size:13px; color:var(--text-muted); cursor:pointer; user-select:none; background:none; border:none; font-family:inherit; padding:0; }
+.terms-toggle svg { transition:transform 0.25s; color:#ccc; }
+.terms-toggle.open svg { transform:rotate(-180deg); }
+.terms-body { display:none; margin-top:10px; padding:14px 16px; background:var(--amber-light); border:1px solid rgba(140,90,110,0.15); border-radius:7px; font-size:13px; color:var(--text-mid); line-height:1.85; }
+.terms-body.open { display:block; }
+.terms-row { display:flex; gap:8px; margin-bottom:6px; }
+.terms-row:last-child { margin-bottom:0; }
+.terms-key { color:var(--text-muted); width:140px; flex-shrink:0; font-size:12px; }
+.pkg-cards { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+.pkg-card { border:1.5px solid var(--border); border-radius:10px; overflow:hidden; transition:box-shadow 0.22s,border-color 0.22s,transform 0.22s var(--ease-spring); background:#fff; }
+.pkg-card:hover { box-shadow:0 8px 28px rgba(45,58,122,0.09); border-color:rgba(107,82,160,0.25); transform:translateY(-2px); }
+.pkg-card.featured { border-color:rgba(140,90,110,0.45); box-shadow:0 3px 14px var(--amber-glow); border-left:3px solid var(--amber); }
+.pkg-card-top { display:flex; align-items:flex-start; justify-content:space-between; padding:18px 20px 14px; gap:12px; }
+.pkg-card-title { font-family:'Noto Serif SC',serif; font-weight:500; font-size:17px; color:var(--indigo); margin-bottom:3px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.pkg-card-sub { font-size:13px; color:var(--text-muted); }
+.pkg-card-right { text-align:right; flex-shrink:0; }
+.pkg-card-price { font-size:20px; font-weight:500; color:var(--text); letter-spacing:-0.03em; line-height:1; }
+.pkg-card-save { display:inline-block; margin-top:5px; font-size:11px; font-weight:500; color:var(--amber); background:rgba(140,90,110,0.1); padding:2px 8px; border-radius:20px; }
+.pkg-card-divider { height:1px; background:var(--border); margin:0 20px; }
+.pkg-card-items { display:grid; grid-template-columns:1fr 1fr; gap:2px 12px; padding:14px 20px 16px; list-style:none; }
+.pkg-card-items li { font-size:13px; color:var(--text-mid); line-height:1.6; display:flex; align-items:baseline; gap:7px; padding:2px 0; }
+.pkg-card-items li::before { content:'·'; color:var(--amber); flex-shrink:0; }
+.pkg-hot { font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--amber); background:rgba(140,90,110,0.12); padding:2px 7px; border-radius:3px; }
+.carousel-outer { position:relative; margin-top:20px; }
+.carousel-arrow { position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:50%; background:var(--amber); border:2px solid #fff; box-shadow:0 3px 10px var(--amber-glow); color:#fff; font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10; transition:background 0.18s,transform 0.2s var(--ease-spring),box-shadow 0.18s; user-select:none; }
+.carousel-arrow:hover { background:var(--amber-dark); box-shadow:0 5px 16px var(--amber-glow); transform:translateY(-50%) scale(1.08); }
+.carousel-arrow:active { transform:translateY(-50%) scale(0.96); }
+.carousel-arrow.prev { left:-18px; }
+.carousel-arrow.next { right:-18px; }
+.carousel-track-wrap { overflow:hidden; border-radius:10px; border:1px solid var(--border); }
+.carousel-track { display:flex; transition:transform 0.42s var(--ease-out); will-change:transform; }
+.testi-card { flex:0 0 100%; background:#fff; padding:24px 26px; }
+.carousel-dots { display:flex; justify-content:center; gap:8px; margin-top:18px; }
+.carousel-dot { width:8px; height:8px; border-radius:50%; background:var(--border-mid); border:none; padding:0; cursor:pointer; transition:background 0.2s,width 0.2s var(--ease-spring); }
+.carousel-dot.active { background:var(--amber); width:22px; border-radius:4px; }
+.carousel-counter { text-align:center; margin-top:8px; font-size:12px; color:var(--text-muted); letter-spacing:0.04em; }
+.testi-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.testi-avatar { width:38px; height:38px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:500; color:#fff; overflow:hidden; }
+.testi-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.testi-meta { flex:1; min-width:0; }
+.testi-name { font-size:14px; font-weight:500; color:var(--text); line-height:1.3; }
+.testi-sub { font-size:12px; color:var(--text-muted); margin-top:2px; }
+.testi-quote-text { font-size:14px; color:var(--text-mid); line-height:1.85; border-left:2px solid var(--amber); padding-left:14px; }
+.testi-orig-toggle { display:inline-block; margin-top:10px; padding:0; background:none; border:none; font-family:inherit; font-size:11.5px; color:var(--text-muted); cursor:pointer; border-bottom:1px dotted var(--text-muted); line-height:1.4; }
+.testi-orig-toggle:hover { color:var(--indigo); border-bottom-color:var(--indigo); }
+[data-lang="en"] .testi-card.show-orig .testi-quote-text .en { display:none !important; }
+[data-lang="en"] .testi-card.show-orig .testi-quote-text .zh { display:inline !important; }
+.school-badges { display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end; }
+.school-logo { display:inline-flex; align-items:center; gap:5px; background:var(--indigo-light); padding:3px 9px 3px 5px; border-radius:20px; white-space:nowrap; }
+.school-mono { width:22px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff; flex-shrink:0; }
+.school-text { font-size:12px; font-weight:500; color:var(--indigo); }
+.process-list { display:flex; flex-direction:column; margin-top:20px; position:relative; }
+.process-list::before { content:''; position:absolute; left:18px; top:36px; bottom:36px; width:1.5px; background:linear-gradient(180deg,var(--amber),var(--mauve),var(--indigo)); opacity:0.3; }
+.process-step { display:flex; gap:16px; align-items:flex-start; padding:14px 0; position:relative; }
+.process-num { width:36px; height:36px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:500; color:#fff; background:linear-gradient(135deg,var(--amber),var(--mauve)); position:relative; z-index:1; box-shadow:0 2px 8px var(--amber-glow); }
+.process-content { padding-top:6px; }
+.process-title { font-size:15px; font-weight:500; color:var(--text); margin-bottom:3px; }
+.process-desc { font-size:14px; color:var(--text-muted); line-height:1.7; }
+.faq-list { display:flex; flex-direction:column; margin-top:16px; }
+.faq-item { border-top:1px solid var(--border); position:relative; }
+.faq-item:last-child { border-bottom:1px solid var(--border); }
+.faq-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--amber),var(--mauve)); transform:scaleY(0); transform-origin:center; transition:transform 0.22s var(--ease-spring); border-radius:0 2px 2px 0; }
+.faq-item.open::before { transform:scaleY(1); }
+.faq-q { display:flex; align-items:center; justify-content:space-between; padding:14px 0 14px 10px; cursor:pointer; gap:12px; font-size:14px; font-weight:500; color:var(--text); user-select:none; }
+.faq-item.open .faq-q { color:var(--indigo); }
+.faq-toggle { flex-shrink:0; width:18px; height:18px; border-radius:50%; border:1px solid var(--border-mid); display:flex; align-items:center; justify-content:center; color:#ccc; transition:all 0.2s; }
+.faq-toggle svg { transition:transform 0.25s; }
+.faq-item.open .faq-toggle { border-color:var(--amber); color:var(--amber); }
+.faq-item.open .faq-toggle svg { transform:rotate(45deg); }
+.faq-a { display:none; padding:0 16px 16px 22px; font-size:14px; color:var(--text-mid); line-height:1.85; }
+.faq-item.open .faq-a { display:block; }
+.contact-form { display:flex; flex-direction:column; gap:14px; margin-top:20px; width:100%; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.form-group { display:flex; flex-direction:column; gap:5px; }
+.form-label { font-size:11px; font-weight:500; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
+.form-input { padding:9px 13px; border:1.5px solid var(--border-mid); border-radius:7px; font-size:14px; font-family:inherit; color:var(--text); outline:none; transition:border-color 0.18s,box-shadow 0.18s; background:#fff; width:100%; }
+.form-input:focus { border-color:var(--mauve); box-shadow:0 0 0 3px var(--mauve-glow); }
+.form-input::placeholder { color:#bbb; }
+.form-checks { display:flex; flex-wrap:wrap; gap:7px; }
+.check-input { display:none; }
+.check-label { padding:5px 13px; border:1.5px solid var(--border-mid); border-radius:20px; font-size:12px; color:var(--text-mid); cursor:pointer; user-select:none; transition:all 0.18s; }
+.check-label:hover { border-color:var(--amber); color:var(--amber); background:var(--amber-light); }
+.check-input:checked + .check-label { background:var(--amber-light); color:var(--amber); border-color:var(--amber); }
+.form-textarea { padding:9px 13px; border:1.5px solid var(--border-mid); border-radius:7px; font-size:14px; font-family:inherit; color:var(--text); outline:none; resize:vertical; min-height:80px; width:100%; transition:border-color 0.18s,box-shadow 0.18s; background:#fff; }
+.form-textarea:focus { border-color:var(--mauve); box-shadow:0 0 0 3px var(--mauve-glow); }
+.form-textarea::placeholder { color:#bbb; }
+.form-upload { border:1.5px dashed rgba(140,90,110,0.25); border-radius:7px; background:var(--amber-light); cursor:pointer; transition:border-color 0.18s,background 0.18s; overflow:hidden; }
+.form-upload:hover { border-color:var(--amber); background:var(--amber-light); }
+.form-upload.drag-over { border-color:var(--amber); background:var(--amber-light); }
+.form-upload-prompt { display:flex; flex-direction:column; align-items:center; gap:6px; padding:20px; text-align:center; pointer-events:none; }
+.form-upload-prompt svg { color:var(--amber-mid); }
+.form-upload-prompt span { font-size:13px; color:var(--text-muted); }
+.form-upload-prompt small { font-size:11px; color:#bbb; }
+.file-list { display:flex; flex-direction:column; gap:6px; padding:10px 12px; }
+.file-item { display:flex; align-items:center; justify-content:space-between; background:#fff; border:1px solid var(--border); border-radius:5px; padding:6px 10px; font-size:13px; color:var(--text-mid); }
+.file-item-name { display:flex; align-items:center; gap:7px; }
+.file-item-name svg { color:var(--amber-mid); flex-shrink:0; }
+.file-remove { background:none; border:none; color:#ccc; cursor:pointer; font-size:14px; line-height:1; padding:0 2px; transition:color 0.15s; }
+.file-remove:hover { color:#e55; }
+.form-upload-add { display:flex; align-items:center; gap:6px; padding:8px 12px; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); cursor:pointer; }
+.form-upload-add:hover { color:var(--amber); }
+.contact-channels { margin-top:32px; padding-top:28px; border-top:1px solid var(--border); display:flex; background:#fff; align-items:flex-start; }
+.channel-item { background:#fff; padding:20px 16px; display:flex; flex-direction:column; align-items:stretch; gap:12px; text-align:center; transition:background 0.18s; flex:1; border-right:1px solid var(--border); }
+.channel-item:last-child { border-right:none; }
+.channel-item.wechat-channel:hover { background:rgba(7,193,96,0.06); }
+.channel-item.email-channel:hover { background:var(--amber-light); }
+.channel-item.xhs-channel:hover { background:rgba(255,36,66,0.06); }
+.channel-icon svg { width:22px; height:22px; transition:stroke 0.18s; }
+
+.channel-label { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; color:#bbb; align-self:center; }
+.channel-value { font-size:15px; color:var(--text); font-weight:500; }
+.channel-btn { display:flex; align-items:center; justify-content:center; gap:7px; width:100%; padding:12px 12px; white-space:nowrap; color:#fff !important; font-size:14px; font-weight:500; border-radius:100px; transition:filter 0.18s,transform 0.2s; cursor:pointer; border:none; font-family:inherit; -webkit-appearance:none; appearance:none; }
+.channel-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+.channel-btn img { width:16px; height:16px; flex-shrink:0; }
+.btn-wechat { background:#07C160; box-shadow:0 2px 8px rgba(7,193,96,0.25); }
+.btn-xhs { background:#FF2442; box-shadow:0 2px 8px rgba(255,36,66,0.25); }
+.btn-xhs .xhs-mark { width:36px !important; height:36px !important; margin:-10px -4px; flex-shrink:0; }
+.btn-email { background:linear-gradient(135deg,#2D3A7A 0%,#8C5A6E 100%); box-shadow:0 2px 8px rgba(140,90,110,0.28); }
+@keyframes fadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+.qr-reveal { overflow:hidden; max-height:0; transition:max-height 0.4s var(--ease-out), opacity 0.3s; opacity:0; width:100%; }
+.qr-reveal.open { max-height:260px; opacity:1; }
+.qr-card { border-radius:10px; overflow:hidden; border:1.5px solid #07C160; display:flex; flex-direction:column; align-items:center; margin:10px auto; width:160px; }
+.qr-card.xhs { border-color:#FF2442; }
+.qr-card-bar { width:100%; padding:7px 12px; font-size:12px; font-weight:600; letter-spacing:0.06em; text-align:center; color:#fff; }
+.qr-card-bar.wc { background:#07C160; }
+.qr-card-bar.xhs { background:#FF2442; }
+.qr-box { width:148px; height:148px; object-fit:contain; background:#fff; display:block; padding:8px; }
+.fact-table { display:flex; flex-direction:column; margin-top:20px; }
+.fact-row { display:flex; padding:10px 0; border-bottom:1px solid #f5f5f5; font-size:14px; align-items:flex-start; }
+.fact-row:first-child { border-top:1px solid #f5f5f5; }
+.fact-key { width:140px; flex-shrink:0; color:var(--text-muted); font-size:13px; display:flex; align-items:center; gap:6px; padding-top:1px; }
+.fact-key svg { color:var(--amber-mid); flex-shrink:0; }
+.fact-val { color:var(--text-mid); line-height:1.6; }
+.slider-section { margin-top:20px; }
+.ba-tabs { display:flex; gap:8px; margin-bottom:16px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.ba-tabs::-webkit-scrollbar { display:none; }
+.ba-tab { flex:0 0 auto; padding:10px 16px; font-size:13px; font-weight:500; font-family:inherit; background:#fff; border:1.5px solid var(--border); border-radius:6px; cursor:pointer; color:var(--text-muted); transition:all 0.18s; white-space:nowrap; text-align:center; }
+.ba-tab:hover { border-color:var(--amber); color:var(--amber); }
+.ba-tab.active { background:linear-gradient(135deg,#2D3A7A 0%,#8C5A6E 100%); color:#fff; border-color:transparent; box-shadow:0 3px 10px var(--amber-glow); }
+.ba-frame-wrap { position:relative; width:100%; height:380px; isolation:isolate; }
+.ba-frame { position:absolute; top:0; left:0; width:100%; height:100%; border-radius:10px; overflow:hidden; border:1px solid var(--border); user-select:none; box-shadow:0 4px 20px rgba(15,23,42,0.07); z-index:1; }
+.ba-pane { display:none; width:100%; height:100%; position:absolute; top:0; left:0; }
+.ba-pane.active { display:block; }
+.ba-before { position:absolute; top:0; left:0; height:100%; width:50%; overflow:hidden; background:#fff; z-index:2; pointer-events:none; }
+.ba-before-content { position:absolute; top:0; left:0; height:100%; width:calc(var(--max-w) - 48px); max-width:calc(100vw - 48px); padding:52px 24px 20px; overflow-y:auto; pointer-events:auto; box-sizing:border-box; }
+.ba-after { position:absolute; top:0; left:0; width:100%; height:100%; background:#FCFBF9; z-index:1; pointer-events:none; }
+.ba-after-content { position:absolute; top:0; left:0; height:100%; width:calc(var(--max-w) - 48px); max-width:calc(100vw - 48px); padding:52px 24px 20px; overflow-y:auto; pointer-events:auto; border-left:3px solid var(--mauve); box-sizing:border-box; }
+.ba-badge { position:absolute; top:12px; z-index:25; pointer-events:none; font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:4px 9px; border-radius:3px; }
+.ba-badge-before { left:14px; background:#DC2626; color:#fff; }
+.ba-badge-after { right:14px; background:#059669; color:#fff; }
+.ba-handle { position:absolute; top:0; bottom:0; left:50%; width:2px; background:linear-gradient(to bottom,var(--amber),var(--mauve),var(--indigo)); z-index:20; pointer-events:none; transform:translateX(-50%); }
+.ba-handle::after { content:"\3008 \3009"; font-size:9px; font-weight:bold; color:#fff; display:flex; align-items:center; justify-content:center; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:32px; height:32px; background:linear-gradient(135deg,#2D3A7A,#8C5A6E); border:2px solid #fff; border-radius:50%; box-shadow:0 3px 8px var(--amber-glow); pointer-events:none; }
+.ba-slider { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; opacity:0; cursor:ew-resize; z-index:25; margin:0; -webkit-appearance:none; appearance:none; }
+.ba-doc-title { font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; text-align:center; }
+.ba-doc-title .short { display:none; }
+.ba-doc-title .full { display:inline; }
+.ba-p { font-family:Georgia,"Times New Roman",serif; font-size:13.5px; color:#334155; margin:0 0 13px; line-height:1.75; }
+.ba-after .ba-p { line-height:1.85; color:#0F172A; }
+.ba-del { color:#B91C1C; background:#FEE2E2; text-decoration:line-through; padding:1px 3px; border-radius:2px; }
+.ba-ins { color:#854D0E; background:#FEF08A; padding:1px 3px; border-radius:2px; font-weight:500; }
+.ba-hl { color:var(--mauve); background:rgba(107,82,160,0.07); border-bottom:1.5px dashed rgba(107,82,160,0.4); padding:1px 4px; border-radius:3px; font-weight:500; }
+/* ── acceptance letters ── */
+.letter-card { flex:0 0 100%; background:#fff; padding:20px 22px; display:flex; flex-direction:column; gap:14px; }
+.letter-img-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(45,58,122,0.38) 0%,rgba(140,90,110,0.1) 40%,transparent 70%); border-radius:8px; pointer-events:none; }
+.letter-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.letter-uni { display:flex; align-items:center; gap:10px; }
+.uni-mono { width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; flex-shrink:0; letter-spacing:0.02em; }
+.uni-logo { height:34px; width:auto; max-width:120px; border-radius:4px; object-fit:contain; flex-shrink:0; display:block; }
+.uni-name { font-size:15px; font-weight:500; color:var(--indigo); line-height:1.3; }
+.uni-prog { font-size:12px; color:var(--text-muted); margin-top:2px; }
+.letter-badge { display:inline-flex; align-items:center; gap:5px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:20px; padding:4px 10px; font-size:11px; font-weight:600; color:#166534; white-space:nowrap; flex-shrink:0; }
+.letter-img-wrap { position:relative; border-radius:8px; overflow:hidden; border:1px solid var(--border); background:#f5f5f5; }
+.letter-img-wrap img { width:100%; height:auto; max-height:520px; object-fit:contain; object-position:top; display:block; }
+.letter-img-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(45,58,122,0.38) 0%,rgba(140,90,110,0.1) 40%,transparent 70%); border-radius:8px; pointer-events:none; }
+.letter-placeholder { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:var(--indigo-light); }
+.letter-placeholder svg { color:var(--indigo); opacity:0.25; }
+.letter-placeholder span { font-size:12px; color:var(--text-muted); }
+.letter-redact { position:absolute; inset:0; pointer-events:none; }
+.redact-strip { position:absolute; height:14px; background:rgba(26,26,46,0.85); border-radius:2px; }
+.letter-caption { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); }
+.letter-caption svg { color:var(--amber-mid); flex-shrink:0; }
+@media(max-width:600px){ .letter-card { padding:16px 6px; } .letter-header { flex-wrap:wrap; padding:0 10px; } .letter-img-wrap { margin:0 20px; } .letter-caption { padding:0 10px; } }
+footer { border-top:1px solid var(--border); background:var(--indigo-light); }
+.footer-inner { max-width:var(--max-w); margin:0 auto; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.footer-text { font-size:13px; color:var(--text-muted); }
+.footer-links { display:flex; gap:16px; }
+.footer-links a { font-size:13px; color:var(--text-muted); transition:color 0.15s; }
+.footer-links a:hover { color:var(--indigo); }
+.sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; z-index:99; padding:12px 20px 16px; background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); border-top:1px solid var(--border); transform:translateY(100%); transition:transform 0.3s var(--ease-out); }
+.sticky-cta.visible { transform:translateY(0); }
+.sticky-cta a { display:block; width:100%; text-align:center; background:linear-gradient(135deg,#2D3A7A 0%,#8C5A6E 100%); color:#fff; padding:14px; border-radius:100px; font-size:16px; font-weight:500; box-shadow:0 3px 14px rgba(140,90,110,0.3); }
+@media(max-width:960px){ .nav-brand-sub { display:none; } .nav-brand-sep { display:none; } }
+@media(max-width:860px){ .nav-cta { display:none; } .nav-inner { padding:0 20px; } }
+@media(max-width:540px){ .nav-links { display:none; } .nav-inner { padding:0 16px; min-height:50px; } body { padding-top:50px; } .nav-right { flex-shrink:0; } .lang-toggle { margin-left:auto; flex-shrink:0; } }
+@media(max-width:600px){
+  body { font-size:16px; padding-bottom:80px; }
+  .sticky-cta { display:block; }
+  .icon-row { display:none; }
+  .ba-doc-title .full { display:none; }
+  .ba-doc-title .short { display:inline; }
+  .hero { padding:20px 0 28px; }
+  .hero h1 { font-size:28px; }
+  .hero-sub { font-size:15px; }
+  .hero-btns .btn { padding:13px 0; width:100%; justify-content:center; }
+  .hero-btns { flex-direction:column; gap:8px; }
+  .icon-row { grid-template-columns:1fr; padding:10px 0; }
+  .icon-item { justify-content:flex-start; padding:10px 0; border-bottom:1px solid var(--border); }
+  .icon-item:last-child { border-bottom:none; }
+  .add-grid { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .contact-channels { flex-direction:column; align-items:stretch; }
+  .channel-item { border-right:none; border-bottom:1px solid var(--border); padding:16px 0; border-radius:0; }
+  .channel-item:last-child { border-bottom:none; }
+  .channel-btn { width:100%; justify-content:center; }
+  .pkg-card-items { grid-template-columns:1fr; }
+  .ba-frame-wrap { height:300px; }
+  .ba-before-content, .ba-after-content { padding:44px 14px 14px; }
+  .ba-p { font-size:12px; }
+  .testi-top { flex-wrap:wrap; gap:8px; }
+  .school-badges { justify-content:flex-start; }
+  .fact-row { flex-direction:column; gap:3px; }
+  .fact-key { width:auto; }
+}
+</style>
+</head>
+<body>
+<div class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">云博文书<span class="nav-brand-sep">·</span><span class="nav-brand-sub">Academic Writing</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#services"><span class="en">Services</span><span class="zh">服务</span></a></li>
+        <li><a href="#packages"><span class="en">Packages</span><span class="zh">套餐</span></a></li>
+        <li><a href="#testimonials"><span class="en">Reviews</span><span class="zh">客户反馈</span></a></li>
+        <li><a href="#acceptance"><span class="en">Letters</span><span class="zh">录取通知</span></a></li>
+        <li><a href="#about"><span class="en">About</span><span class="zh">关于</span></a></li>
+        <li><a href="#contact"><span class="en">Contact</span><span class="zh">联系</span></a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-l="zh">中文</button>
+        <button class="lang-btn" data-l="en">EN</button>
+      </div>
+      <a href="#contact" class="nav-cta"><span class="en">Get in touch</span><span class="zh">联系我</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero-logo"><img src="https://yunbowenshu.com/logo.png" alt="云博文书"></div>
+
+  <div class="hero">
+    <h1>
+      <span class="en">Academic English,<br>done properly.</span>
+      <span class="zh">学术英文，<br>认真写好。</span>
+    </h1>
+    <p class="hero-cn en">学术英文，认真写好</p>
+    <p class="hero-cn zh" style="color:#999;font-size:15px">Academic English, done properly.</p>
+    <p class="hero-sub">
+      <span class="en">Writing and editing for graduate applicants, researchers, and academic professionals — by one person, since 2019. Human-written. No AI.</span>
+      <span class="zh">为研究生申请者、学术研究人员及专业人士提供英文写作与润色服务——由一人完成，自2019年起。真人撰写，不用AI。</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-rose"><span class="en">Get in touch</span><span class="zh">联系我</span></a>
+      <a href="#services" class="btn btn-light"><span class="en">See services</span><span class="zh">了解服务</span></a>
+    </div>
+  </div>
+
+  <div class="section" id="about">
+    <h2><span class="en">About</span><span class="zh">关于我</span></h2>
+    <p>
+      <span class="en">I am an academic writing consultant with professional-level academic English, affiliated with a QS top-50 research university as both staff and alumni. Based in Amsterdam, I have advised and supported 200+ students from bachelor through PhD level, with placements at leading institutions including Ivy League universities and top-ranked programmes across the US, UK, Europe, Asia, and Oceania.</span>
+      <span class="zh">我是一位学术英文写作顾问，具备专业学术英语水平，以员工及校友身份隶属一所QS前50研究型大学，现居阿姆斯特丹。自2019年起，我已为200余名从本科到博士阶段的学生提供写作支持与申请辅导，客户成功录取的院校涵盖美国、英国、欧洲、亚洲及大洋洲的顶尖高校，包括常春藤盟校在内的众多知名大学。</span>
+    </p>
+    <p>
+      <span class="en">I work across all academic disciplines. Every document is written by me personally. All client materials are treated as strictly confidential and are never retained or reused after the engagement ends.</span>
+      <span class="zh">服务涵盖所有学科领域。每份文书均由我本人亲自撰写，客户资料严格保密，合作结束后不留存、不转作他用。</span>
+    </p>
+    <div class="fact-table">
+      <div class="fact-row">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="en">Scope</span><span class="zh">覆盖范围</span></span>
+        <span class="fact-val"><span class="en">Worldwide — any university, any country</span><span class="zh">全球范围——任何国家，任何高校</span></span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Written by</span><span class="zh">撰写方式</span></span>
+        <span class="fact-val"><span class="en">Personally — no outsourcing, no AI tools</span><span class="zh">本人亲自完成，不外包，不使用AI</span></span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="en">Deposit</span><span class="zh">定金</span></span>
+        <span class="fact-val"><span class="en">50% to begin · balance before final delivery</span><span class="zh">50%定金开始 · 交稿前结清余款</span></span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-key"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span class="en">Payment</span><span class="zh">付款方式</span></span>
+        <span class="fact-val"><span class="en">WeChat Pay · Alipay · Revolut · Wise</span><span class="zh">微信支付 · 支付宝 · Revolut · Wise</span></span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="sample">
+    <h2><span class="en">The editing process</span><span class="zh">润色示例</span></h2>
+    <p><span class="en">Each sample below shows a real draft alongside its edited version — move the divider to read both.</span><span class="zh">以下示例展示真实初稿与润色后文稿——拖动分隔线即可对比阅读。</span></p>
+    <div class="slider-section">
+      <div class="ba-tabs">
+        <button class="ba-tab active" data-pane="ba1"><span class="en">Personal Statement</span><span class="zh">个人陈述</span></button>
+        <button class="ba-tab" data-pane="ba2"><span class="en">Research Proposal</span><span class="zh">研究计划</span></button>
+        <button class="ba-tab" data-pane="ba3"><span class="en">Reference Letter</span><span class="zh">推荐信</span></button>
+      </div>
+      <div class="ba-frame-wrap">
+        <div class="ba-frame" id="ba-frame">
+        <span class="ba-badge ba-badge-before"><span class="en">Before</span><span class="zh">润色前</span></span>
+        <span class="ba-badge ba-badge-after"><span class="en">After</span><span class="zh">润色后</span></span>
+        <div class="ba-pane active" id="ba1">
+          <div class="ba-before"><div class="ba-before-content">
+            <div class="ba-doc-title"><span class="full">Personal Statement — Accounting &amp; Finance</span><span class="short">Personal Statement</span></div>
+            <p class="ba-p"><span class="ba-del">Given the swift advancements within the Accounting and Finance discipline, it is imperative to recognize the escalating significance of comprehending the broader economic market dynamics in general,</span> and the accurate empirical assessment of economic turbulence <span class="ba-del">recognized as key aspects that influence investor behavior globally. I have recognized the great need for ambitious and talented scholars to further advance this knowledge by pursuing a Ph.D. at your esteemed university.</span></p>
+            <p class="ba-p">I graduated from <span class="ba-ins">Tsinghua University</span> and the <span class="ba-ins">London School of Economics</span>, where I specialised in <span class="ba-ins">Accounting</span>, and passed the ACCA exam outside of class time.</p>
+          </div></div>
+          <div class="ba-after"><div class="ba-after-content">
+            <div class="ba-doc-title"><span class="full">Personal Statement — Accounting &amp; Finance</span><span class="short">Personal Statement</span></div>
+            <p class="ba-p">The current <span class="ba-hl">volatility in global capital markets underscores the necessity</span> of robust empirical frameworks within financial accounting. My ambition is to master the quantitative methodologies required to <span class="ba-hl">evaluate asset vulnerabilities during macro-economic contractions</span> — and to apply that expertise within international regulatory frameworks.</p>
+            <p class="ba-p">Having completed my academic foundations at <span class="ba-hl">Tsinghua University and the London School of Economics</span>, specialising in macro-accounting frameworks, I cleared my ACCA qualifications ahead of schedule.</p>
+          </div></div>
+        </div>
+        <div class="ba-pane" id="ba2">
+          <div class="ba-before"><div class="ba-before-content">
+            <div class="ba-doc-title"><span class="full">Research Proposal — Carbon Accounting</span><span class="short">Research Proposal</span></div>
+            <p class="ba-p"><span class="ba-del">In recent decades, the disclosure of accounting information has gained growing significance within the realm of accounting research,</span> which, partly due to transparency efforts, but also because of the heightened importance of environmental protection, <span class="ba-del">has led to a situation where individuals express apprehension regarding whether corporations are actively addressing the emerging environmental crisis.</span> In recent years, China put forward a regulatory policy of building an "ecological civilization" (Yu and Tsai, 2018).</p>
+            <p class="ba-p">Furthermore, there is a clear imperative to introduce <span class="ba-del">innovative accounting practices, as well as developing more familiarity with corporate environmental transparency,</span> analysis, and auditing.</p>
+          </div></div>
+          <div class="ba-after"><div class="ba-after-content">
+            <div class="ba-doc-title"><span class="full">Research Proposal — Carbon Accounting</span><span class="short">Research Proposal</span></div>
+            <p class="ba-p">Corporate environmental accountability has transitioned from a public relations choice to a <span class="ba-hl">core structural variable in corporate financial reporting</span>. With China's explicit mandate to build an "ecological civilization," enterprise-level low-carbon transitions have become a <span class="ba-hl">baseline institutional constraint</span> rather than a voluntary preference (Yu and Tsai, 2018).</p>
+            <p class="ba-p">Developing advanced expertise in <span class="ba-hl">green accounting methodologies and sustainability auditing</span> has emerged as an essential next step in this research agenda.</p>
+          </div></div>
+        </div>
+        <div class="ba-pane" id="ba3">
+          <div class="ba-before"><div class="ba-before-content">
+            <div class="ba-doc-title"><span class="full">Reference Letter — PhD Application</span><span class="short">Reference Letter</span></div>
+            <p class="ba-p"><span class="ba-del">It is with great honor that I write this letter of recommendation for [Name]'s admission to the PhD Program at the University of Macau.</span> I am a professor at [University] and came to know her in [year]. <span class="ba-del">I remember clearly how from the very beginning of her studies, she distinguished herself by submitting an exceptionally well-investigated and analytical research pieces on commercial management.</span> Overall, I would qualify her as one of the outstanding students of her year.</p>
+          </div></div>
+          <div class="ba-after"><div class="ba-after-content">
+            <div class="ba-doc-title"><span class="full">Reference Letter — PhD Application</span><span class="short">Reference Letter</span></div>
+            <p class="ba-p">I am pleased to provide my highest evaluation for [Candidate] regarding her doctoral application at the University of Macau. As her long-term professor at [University], I have had ample opportunity to assess her <span class="ba-hl">methodological discipline and academic writing proficiency</span>. From her first year, she distinguished herself by producing comprehensive, critical research papers on macroeconomic strategy. Based on her <span class="ba-hl">advanced analytical acumen</span>, I rank her in the top 5% of her graduating class.</p>
+          </div></div>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="ba-slider" id="ba-slider">
+        </div><!-- end ba-frame -->
+        <div class="ba-handle" id="ba-handle"></div>
+      </div><!-- end ba-frame-wrap -->
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="services">
+    <h2><span class="en">Services</span><span class="zh">服务范围</span></h2>
+    <p><span class="en">Every document is available at three tiers — click any service to see the breakdown.</span><span class="zh">每类文书均提供三种服务层级——点击查看详情。</span></p>
+    <div class="svc-list">
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="svc-name"><span class="en">Personal Statement / SOP</span><span class="zh">个人陈述 / 目的陈述</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong><div class="tier-desc"><span class="en">Language corrections on your draft</span><span class="zh">语法、词汇、行文润色</span></div></td><td>¥1,500</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong><div class="tier-desc"><span class="en">Full structural and language editing</span><span class="zh">结构重组与语言全面润色</span></div></td><td>¥2,500</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong><div class="tier-desc"><span class="en">From scratch — intake, outline, complete draft</span><span class="zh">从零开始——采集、大纲、全文撰写</span></div></td><td>¥4,500</td><td>2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="svc-name"><span class="en">Reference Letters</span><span class="zh">推荐信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong><div class="tier-desc"><span class="en">Language corrections on a supplied draft</span><span class="zh">对已有初稿进行语言润色</span></div></td><td>¥600</td><td>—</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong><div class="tier-desc"><span class="en">Structural and language rework</span><span class="zh">结构与语言全面改写</span></div></td><td>¥1,000</td><td>—</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong><div class="tier-desc"><span class="en">Written from intake — sounds like the signatory</span><span class="zh">从资料采集到成稿，文风贴合推荐人</span></div></td><td>¥1,200</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span class="svc-name"><span class="en">Academic CV</span><span class="zh">学术简历</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong></td><td>¥600</td><td>—</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong></td><td>¥1,000</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong></td><td>¥1,200</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="svc-name"><span class="en">Motivation Letter</span><span class="zh">动机信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong></td><td>¥1,200</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong></td><td>¥2,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong></td><td>¥3,500</td><td>2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="svc-name"><span class="en">Research Proposal</span><span class="zh">研究计划</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong></td><td>¥1,200</td><td>1</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong></td><td>¥2,000</td><td>2</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong></td><td>¥4,500</td><td>2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span class="svc-name"><span class="en">Supervisor Inquiry Letter</span><span class="zh">导师联系信</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <table class="tier-table">
+            <thead><tr><th><span class="en">Tier</span><span class="zh">层级</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Revisions</span><span class="zh">修改</span></th></tr></thead>
+            <tbody>
+              <tr><td><strong><span class="en">Edit</span><span class="zh">润色</span></strong></td><td>¥500</td><td>—</td></tr>
+              <tr><td><strong><span class="en">Rewrite</span><span class="zh">重写</span></strong></td><td>¥800</td><td>—</td></tr>
+              <tr><td><strong><span class="en">Full Writing</span><span class="zh">全程写作</span></strong></td><td>¥1,000</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="svc-item">
+        <div class="svc-header" onclick="toggleSvc(this)">
+          <div class="svc-left">
+            <svg class="svc-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span class="svc-name"><span class="en">Paper &amp; Dissertation Editing</span><span class="zh">论文润色</span></span>
+          </div>
+          <div class="svc-toggle-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="svc-tiers">
+          <p style="font-size:13px;color:#555;line-height:1.65;margin-bottom:12px">
+            <span class="en">Journal papers, dissertation chapters, research proposals — edited for language, academic register, and argument flow. Priced by length and complexity.</span>
+            <span class="zh">期刊论文、毕业论文章节、研究计划——针对语言、学术语体及论证逻辑进行润色。按篇幅与复杂程度定价。</span>
+          </p>
+          <a href="#contact" class="btn btn-light" style="font-size:13px;padding:7px 14px"><span class="en">Enquire for a quote</span><span class="zh">询价</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:28px"><span class="en">Additional services</span><span class="zh">附加服务</span></h3>
+    <div class="add-grid">
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Programme Selection</span><span class="zh">项目选择</span></div>
+          <div class="add-desc"><span class="en">Shortlist of 8 target programmes</span><span class="zh">8个目标项目精选名单</span></div>
+          <div class="add-price">¥3,000</div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Mock Interview</span><span class="zh">模拟面试</span></div>
+          <div class="add-desc"><span class="en">60–90 min — admissions and PhD supervisor meetings</span><span class="zh">60–90分钟，适用于录取面试及导师会面</span></div>
+          <div class="add-price"><span class="en">¥2,000/session</span><span class="zh">¥2,000/次</span></div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <div class="add-name"><span class="en">Application Support</span><span class="zh">申请辅导</span></div>
+          <div class="add-desc"><span class="en">Application form completion, supplementary statements, referee submission guidance</span><span class="zh">申请表填写、附加文书、推荐人提交指导</span></div>
+          <div class="add-price"><span class="en">¥1,500/application</span><span class="zh">¥1,500/个申请</span></div>
+        </div>
+      </div>
+      <div class="add-item">
+        <svg class="add-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div>
+          <div class="add-name"><span class="en">English Language Tutoring</span><span class="zh">英语辅导</span></div>
+          <div class="add-desc"><span class="en">Academic writing, exam prep, or professional English for students and researchers</span><span class="zh">学术写作、考试备考，或面向学生及研究人员的职业英语</span></div>
+          <div class="add-price"><span class="en">Enquire for rates</span><span class="zh">询价</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="terms-toggle" onclick="toggleTerms(this)">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 4.5 6 7.5 9 4.5"/></svg>
+      <span class="en">Terms &amp; notes</span><span class="zh">条款说明</span>
+    </button>
+    <div class="terms-body">
+      <div class="terms-row"><span class="terms-key"><span class="en">Rush orders</span><span class="zh">加急服务</span></span><span><span class="en">First draft in 3 working days: +50%, subject to availability</span><span class="zh">3个工作日初稿：加收50%，视档期而定</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Extra revisions</span><span class="zh">额外修改</span></span><span><span class="en">¥400/round, max 2 additional rounds</span><span class="zh">每轮¥400，最多额外2轮</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Full upfront</span><span class="zh">全额预付</span></span><span><span class="en">Pay in full before work begins: 5% discount</span><span class="zh">开始前全额付款：95折</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Deposit</span><span class="zh">定金</span></span><span><span class="en">50% to begin · balance before final delivery</span><span class="zh">50%定金开始 · 交稿前结清余款</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Referral</span><span class="zh">推荐奖励</span></span><span><span class="en">¥500 for referring a new client who books a package</span><span class="zh">成功推荐新客户购买套餐可获¥500现金奖励</span></span></div>
+      <div class="terms-row"><span class="terms-key"><span class="en">Payment</span><span class="zh">付款方式</span></span><span><span class="en">WeChat Pay · Alipay · Revolut · Wise</span><span class="zh">微信支付 · 支付宝 · Revolut · Wise</span></span></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="packages">
+    <h2><span class="en">Packages</span><span class="zh">套餐服务</span></h2>
+    <p><span class="en">The most commonly requested documents bundled at a discount. All Full Writing tier.</span><span class="zh">最常用的文书组合统一按全程写作层级，享受折扣。</span></p>
+    <div class="pkg-cards">
+      <div class="pkg-card">
+        <div class="pkg-card-top">
+          <div>
+            <div class="pkg-card-title"><span class="en">Writing Bundle</span><span class="zh">写作套餐</span></div>
+            <div class="pkg-card-sub"><span class="en">Essential application documents</span><span class="zh">核心申请文书</span></div>
+          </div>
+          <div class="pkg-card-right">
+            <div class="pkg-card-price">¥6,200</div>
+            <div class="pkg-card-save"><span class="en">save 15%</span><span class="zh">省15%</span></div>
+          </div>
+        </div>
+        <div class="pkg-card-divider"></div>
+        <ul class="pkg-card-items">
+          <li><span class="en">1× Personal Statement / SOP</span><span class="zh">1份 个人陈述</span></li>
+          <li><span class="en">1× Academic CV</span><span class="zh">1份 学术简历</span></li>
+          <li><span class="en">2× Reference Letters</span><span class="zh">2封 推荐信</span></li>
+        </ul>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-card-top">
+          <div>
+            <div class="pkg-card-title"><span class="en">Full File <span class="pkg-hot">Popular</span></span><span class="zh">完整档案 <span class="pkg-hot">热门</span></span></div>
+            <div class="pkg-card-sub"><span class="en">Core application documents + programme selection</span><span class="zh">核心申请文书加项目选择</span></div>
+          </div>
+          <div class="pkg-card-right">
+            <div class="pkg-card-price">¥8,800</div>
+            <div class="pkg-card-save"><span class="en">save 18%</span><span class="zh">省18%</span></div>
+          </div>
+        </div>
+        <div class="pkg-card-divider"></div>
+        <ul class="pkg-card-items">
+          <li><span class="en">1× Personal Statement / SOP</span><span class="zh">1份 个人陈述</span></li>
+          <li><span class="en">1× Academic CV</span><span class="zh">1份 学术简历</span></li>
+          <li><span class="en">2× Reference Letters</span><span class="zh">2封 推荐信</span></li>
+          <li><span class="en">Programme Selection (8 programmes)</span><span class="zh">项目选择（8个项目）</span></li>
+        </ul>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-card-top">
+          <div>
+            <div class="pkg-card-title"><span class="en">Complete</span><span class="zh">全套服务</span></div>
+            <div class="pkg-card-sub"><span class="en">Full graduate or PhD application</span><span class="zh">研究生或博士完整申请套餐</span></div>
+          </div>
+          <div class="pkg-card-right">
+            <div class="pkg-card-price">¥14,900</div>
+            <div class="pkg-card-save"><span class="en">save 20%</span><span class="zh">省20%</span></div>
+          </div>
+        </div>
+        <div class="pkg-card-divider"></div>
+        <ul class="pkg-card-items">
+          <li><span class="en">1× Personal Statement / SOP</span><span class="zh">1份 个人陈述 / 目的陈述</span></li>
+          <li><span class="en">1× Research Proposal</span><span class="zh">1份 研究计划</span></li>
+          <li><span class="en">1× Academic CV</span><span class="zh">1份 学术简历</span></li>
+          <li><span class="en">2× Reference Letters</span><span class="zh">2封 推荐信</span></li>
+          <li><span class="en">3× Supervisor Inquiry Letters</span><span class="zh">3封 导师联系信</span></li>
+          <li><span class="en">Programme Selection (8 programmes)</span><span class="zh">项目选择（8个项目）</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="process">
+    <h2><span class="en">How it works</span><span class="zh">合作流程</span></h2>
+    <p><span class="en">Everything is handled directly between us — no intermediaries, no outsourcing.</span><span class="zh">全程由我本人跟进，不经任何中间环节，不外包给任何人。</span></p>
+    <div class="process-list">
+      <div class="process-step"><div class="process-num">1</div><div class="process-content">
+        <div class="process-title"><span class="en">Get in touch</span><span class="zh">发起咨询</span></div>
+        <div class="process-desc"><span class="en">Reach out via the contact form, email, WeChat, or Xiaohongshu. Briefly describe what you need — I reply within 24–36 hours.</span><span class="zh">通过表单、邮件、微信或小红书联系我，简单描述你的情况，我会在24至36小时内回复。</span></div>
+      </div></div>
+      <div class="process-step"><div class="process-num">2</div><div class="process-content">
+        <div class="process-title"><span class="en">Background intake</span><span class="zh">素材采集</span></div>
+        <div class="process-desc"><span class="en">I send you a detailed questionnaire covering your background, goals, and target programmes. This is the foundation everything is built on.</span><span class="zh">我会发送一份详细问卷，了解你的背景、目标和申请项目——这是后续所有写作的基础。</span></div>
+      </div></div>
+      <div class="process-step"><div class="process-num">3</div><div class="process-content">
+        <div class="process-title"><span class="en">First draft</span><span class="zh">撰写初稿</span></div>
+        <div class="process-desc"><span class="en">I write everything personally, without AI tools. You receive a complete draft — not an outline, not a template.</span><span class="zh">所有内容均由我本人亲自撰写，不使用AI工具。你收到的是完整初稿，不是大纲，不是模板。</span></div>
+      </div></div>
+      <div class="process-step"><div class="process-num">4</div><div class="process-content">
+        <div class="process-title"><span class="en">Revisions</span><span class="zh">修改打磨</span></div>
+        <div class="process-desc"><span class="en">You give feedback, I revise. Rounds included vary by service and tier — see each service for details.</span><span class="zh">你提出反馈，我进行修改。各项服务包含的修改次数不同，详见各项说明。</span></div>
+      </div></div>
+      <div class="process-step"><div class="process-num">5</div><div class="process-content">
+        <div class="process-title"><span class="en">Final delivery</span><span class="zh">交付定稿</span></div>
+        <div class="process-desc"><span class="en">The finished document is yours. Submit it, and let me know how it goes.</span><span class="zh">定稿交付给你。提交申请，有消息记得告诉我。</span></div>
+      </div></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="testimonials">
+    <h2><span class="en">What clients say</span><span class="zh">客户反馈</span></h2>
+    <p><span class="en">A selection of feedback from clients, with their outcomes.</span><span class="zh">部分客户的真实反馈，附申请结果。</span></p>
+    <div class="carousel-outer">
+      <button class="carousel-arrow prev" id="testi-prev" aria-label="Previous">&#8249;</button>
+      <button class="carousel-arrow next" id="testi-next" aria-label="Next">&#8250;</button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="testi-track">
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-zhang.png" alt="" data-fb-char="张" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">张 ***</span><span class="en">Zhang Z***</span></div>
+                  <div class="testi-sub"><span class="en">Graduate applicant · United States</span><span class="zh">研究生申请 · 美国</span></div>
+                </div>
+              </div>
+              <div class="school-badges">
+                <div class="school-logo"><div class="school-mono" style="background:#003262">Cal</div><span class="school-text">Berkeley · 2026</span></div>
+                <div class="school-logo"><div class="school-mono" style="background:#002D72">JHU</div><span class="school-text">Johns Hopkins · 2026</span></div>
+              </div>
+            </div>
+            <p class="testi-quote-text"><span class="en">Harvard was my first choice, but I was rejected for lack of work experience. He didn't let me give up — he pivoted my strategy, and I was subsequently accepted to Berkeley and Johns Hopkins. Truly amazing support.</span><span class="zh">哈佛是我最初的目标，但因工作经验不足被拒。他没有让我放弃——调整了申请策略，后来我拿到了Berkeley和Johns Hopkins的录取。真的很感谢。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-chen.png" alt="" data-fb-char="陈" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">陈 ***</span><span class="en">Chen X***</span></div>
+                  <div class="testi-sub"><span class="en">PhD applicant · Finland</span><span class="zh">博士申请 · 芬兰</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#003580">HY</div><span class="school-text">Helsinki · PhD · 2025</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">Other agencies had no idea Helsinki required a separate entrance exam — I only found out because he told me in advance. I registered for the April exam in time and got through. More knowledgeable than anyone else I've worked with.</span><span class="zh">其他中介根本不知道赫尔辛基要单独参加入学考试——还是他提前告诉我的。我及时报了四月份的考试，顺利通过。他对申请流程的了解程度，我没有见过第二个。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar" style="background:linear-gradient(135deg,#8C5A6E,#6B52A0)">王</div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">王 ***</span><span class="en">Wang L***</span></div>
+                  <div class="testi-sub"><span class="en">Personal Statement · United States</span><span class="zh">个人陈述 · 美国</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#A51C30">H</div><span class="school-text">Harvard · 2024</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">I sent over my revised content in the morning and had the final Harvard PS back the same afternoon. The turnaround was genuinely impressive, and the quality matched.</span><span class="zh">早上发过去修改内容，下午就收到了定稿。速度让我没想到，质量也没有因此打折扣。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-liu.png" alt="" data-fb-char="刘" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">刘 ***</span><span class="en">Liu Y***</span></div>
+                  <div class="testi-sub"><span class="en">Research Proposal · United Kingdom</span><span class="zh">研究计划 · 英国</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#231F74">Bath</div><span class="school-text">Bath · PhD · 2026</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">My research is in English for Academic Purposes. The consultant delivered a detailed outline, refined it until everything was right — a few months later I received an offer from Bath.</span><span class="zh">我的研究方向是学术英语与语言习得。他帮我从头梳理研究计划，反复打磨，几个月后我拿到了Bath的博士录取。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-zhou.png" alt="" data-fb-char="周" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">周 ***</span><span class="en">Zhou M***</span></div>
+                  <div class="testi-sub"><span class="en">Personal Statement + Reference Letters · United Kingdom</span><span class="zh">个人陈述 + 推荐信 · 英国</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#660099">MCR</div><span class="school-text">Manchester · 2025</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">你太给力了 — the reference letters and personal statement were delivered promptly and with real care. Every detail was attended to.</span><span class="zh">你太给力了——推荐信和个人陈述都按时交付，做得很认真。每一个细节都照顾到了，真的很感谢你花了这么多心思。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-sun.png" alt="" data-fb-char="孙" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">孙 ***</span><span class="en">Sun J***</span></div>
+                  <div class="testi-sub"><span class="en">Academic CV · Australia</span><span class="zh">学术简历 · 澳大利亚</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#003087">Melb</div><span class="school-text">Melbourne · 2026</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">I'd been told by a potential supervisor at Melbourne that my experience wasn't strong enough. He rewrote everything — more accurate, more compelling, under 600 words. The revised version made a real difference.</span><span class="zh">Melbourne的导师告诉我，我的背景不够有说服力。他把简历重新写了一遍——更准确、更有力、控制在600字以内。修改后的版本确实起了作用。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-top">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="testi-avatar"><img src="avatars/avatar-zhao.png" alt="" data-fb-char="赵" onerror="avatarFail(this)"></div>
+                <div class="testi-meta">
+                  <div class="testi-name"><span class="zh">赵 ***</span><span class="en">Zhao R***</span></div>
+                  <div class="testi-sub"><span class="en">Research Proposal · Australia</span><span class="zh">研究计划 · 澳大利亚</span></div>
+                </div>
+              </div>
+              <div class="school-badges"><div class="school-logo"><div class="school-mono" style="background:#51247A">UQ</div><span class="school-text">Queensland · PhD · 2026</span></div></div>
+            </div>
+            <p class="testi-quote-text"><span class="en">I'd been struggling to frame my political science research for months. He helped me build the proposal from scratch — clear research questions, a coherent theoretical framework, a literature positioning that made sense. UQ came back with an offer within six weeks.</span><span class="zh">我在东南亚威权政治这个方向上卡了好几个月，就是找不到合适的理论框架。他帮我从头搭建研究计划——研究问题清晰，理论框架完整，文献定位也说得通。六周后UQ给了录取。</span></p>
+            <button class="testi-orig-toggle en" type="button" onclick="toggleOrig(this)" data-show="Translated from Chinese · view original" data-hide="Showing original · back to translation">Translated from Chinese · view original</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-dots" id="testi-dots"></div>
+      <div class="carousel-counter" id="testi-counter"></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="acceptance">
+    <h2><span class="en">Acceptance letters</span><span class="zh">录取通知</span></h2>
+    <p><span class="en">A selection of recent client offer letters — each leading to a confirmed place.</span><span class="zh">部分近年客户录取通知，每封均对应一份成功录取。姓名及个人信息已遮盖。</span></p>
+    <div class="carousel-outer">
+      <button class="carousel-arrow prev" id="acc-prev" aria-label="Previous">&#8249;</button>
+      <button class="carousel-arrow next" id="acc-next" aria-label="Next">&#8250;</button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="acc-track">
+
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-nus.png" alt="NUS" data-fb-bg="#003D7C" data-fb-text="NUS" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">National University of Singapore</div>
+                  <div class="uni-prog"><span class="en">MSc Integrated Sustainable Design</span><span class="zh">可持续综合设计硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-nus-msc.png" alt="NUS MSc offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-sydney.png" alt="Sydney" data-fb-bg="#003D7C" data-fb-text="USyd" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">University of Sydney</div>
+                  <div class="uni-prog"><span class="en">Doctor of Philosophy · Design Lab</span><span class="zh">博士 · 设计学院</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-sydney.png" alt="Sydney PhD offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-unsw.png" alt="UNSW" data-fb-bg="#FFD100" data-fb-text="UNSW" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">UNSW Sydney</div>
+                  <div class="uni-prog"><span class="en">MPhil Engineering · Research</span><span class="zh">工程研究硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-unsw.png" alt="UNSW MPhil offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-uppsala.png" alt="Uppsala" data-fb-bg="#990000" data-fb-text="UU" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">Uppsala University</div>
+                  <div class="uni-prog"><span class="en">PhD Programme · Education</span><span class="zh">博士项目 · 教育学</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-uppsala.png" alt="Uppsala PhD offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-cityu.png" alt="CityU" data-fb-bg="#8B0000" data-fb-text="CityU" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">City University of Hong Kong</div>
+                  <div class="uni-prog"><span class="en">Doctor of Philosophy · Public Policy</span><span class="zh">博士 · 公共政策</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-cityu.png" alt="CityU PhD offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-nottingham.png" alt="Nottingham" data-fb-bg="#004B87" data-fb-text="Notts" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">University of Nottingham</div>
+                  <div class="uni-prog"><span class="en">MArch Architecture Design</span><span class="zh">建筑设计硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-nottingham.png" alt="Nottingham MArch offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-sheffield.png" alt="Sheffield" data-fb-bg="#1B3A6B" data-fb-text="Shef" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">University of Sheffield</div>
+                  <div class="uni-prog"><span class="en">MA Urban Design and Planning</span><span class="zh">城市设计与规划硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-sheffield.png" alt="Sheffield MA offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-cardiff.png" alt="Cardiff" data-fb-bg="#C8102E" data-fb-text="Cardiff" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">Cardiff University</div>
+                  <div class="uni-prog"><span class="en">MA Architectural Design</span><span class="zh">建筑设计硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-cardiff.png" alt="Cardiff MA offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-manchester.png" alt="MMU" data-fb-bg="#58595B" data-fb-text="MMU" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">Manchester Metropolitan University</div>
+                  <div class="uni-prog"><span class="en">MA Architecture and Urbanism</span><span class="zh">建筑与城市主义硕士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-manchester.png" alt="Manchester Met MA offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+          <div class="letter-card">
+            <div class="letter-header">
+              <div class="letter-uni">
+                <img class="uni-logo" src="letters/logo-nus.png" alt="NUS" data-fb-bg="#003D7C" data-fb-text="NUS" onerror="uniLogoFail(this)">
+                <div>
+                  <div class="uni-name">National University of Singapore</div>
+                  <div class="uni-prog"><span class="en">BEng Chemical Engineering</span><span class="zh">化学工程学士</span></div>
+                </div>
+              </div>
+              <div class="letter-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span class="en">GOT OFFER</span><span class="zh">已拿到 OFFER</span></div>
+            </div>
+            <div class="letter-img-wrap">
+              <img src="letters/letter-nus-undergrad.png" alt="NUS undergrad offer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="letter-placeholder" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span><span class="en">Screenshot goes here</span><span class="zh">截图放这里</span></span></div>
+            </div>
+            <div class="letter-caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="en">Name and personal details redacted</span><span class="zh">姓名及个人信息已遮盖</span></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-dots" id="acc-dots"></div>
+      <div class="carousel-counter" id="acc-counter"></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="faq">
+    <h2><span class="en">Common questions</span><span class="zh">常见问题</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Do you write from scratch, or do you only edit existing drafts?</span><span class="zh">你是全程写作，还是只润色我已有的草稿？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Both. Every service comes at three tiers:<br><br><strong>Edit</strong> — language corrections on your draft<br><strong>Rewrite</strong> — full structural and language overhaul<br><strong>Full Writing</strong> — from scratch, built on a detailed intake</span><span class="zh">两种都做。每项服务分三个层级：<br><br><strong>润色（Edit）</strong>——对你的草稿进行语言修正<br><strong>重写（Rewrite）</strong>——结构与语言全面改写<br><strong>全程写作（Full Writing）</strong>——从零开始，基于详细素材采集</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">How do I know you won't use AI?</span><span class="zh">你说不用AI，我怎么确认？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Every document is built entirely from what you share with me — your background, experiences, academic trajectory, and goals. All materials are professionally written to meet the academic standards of the institutions you are applying to.</span><span class="zh">每份文书都完全建立在你提供的信息上——你的背景、经历、学术轨迹和目标。这种层次的个人细节只能收集，无法生成。所有材料均按照目标院校的学术诚信要求撰写。</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">What's your turnaround time?</span><span class="zh">交稿需要多长时间？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Standard turnaround for a first draft is 5–7 working days after intake materials are received. Rush orders (3 working days) are available at +50%, subject to availability. For packages with multiple documents, we agree a schedule at the start.</span><span class="zh">收到素材后，标准交稿时间为5至7个工作日。加急服务（3个工作日）另加50%，视档期而定。套餐含多份文书的，我们会在开始时确认时间安排。</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Is my information kept confidential?</span><span class="zh">我的信息和文书内容会保密吗？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Yes. Everything you share with me is used only to write your documents. Nothing is shared with third parties, and I do not keep or reuse your materials after the engagement ends.</span><span class="zh">是的。你提供给我的所有信息只用于撰写你的文书，不会与任何第三方共享。合作结束后，我不会留存或重复使用你的材料。</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Can you work with my deadline?</span><span class="zh">你能配合我的截止日期吗？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Usually yes — get in touch as early as possible. Tell me your deadline upfront and I'll tell you honestly whether it works.</span><span class="zh">大多数情况下可以——尽量早联系我。把你的截止日期告诉我，我会直接说行不行。</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">I'm not sure which service or package I need. Can you advise?</span><span class="zh">我不确定该选哪项服务或套餐，可以咨询吗？</span></span>
+          <div class="faq-toggle"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></div>
+        </div>
+        <div class="faq-a"><span class="en">Yes — just reach out and describe your situation. I'll tell you what I think you actually need, not what's most expensive.</span><span class="zh">可以——直接联系我，描述你的情况就行。我会告诉你我觉得你真正需要什么，而不是推荐最贵的那个。</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="contact">
+    <h2><span class="en">Get in touch</span><span class="zh">联系我</span></h2>
+    <p><span class="en">Reach out with a brief description of what you need. I reply within 24–36 hours.</span><span class="zh">简要描述你的需求，我会在24至36小时内回复。</span></p>
+    <form class="contact-form" id="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><span class="en">Name</span><span class="zh">姓名</span></label>
+          <input class="form-input" type="text" id="f-name" data-ph-en="Your name" data-ph-zh="姓名" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Email</span><span class="zh">邮箱</span></label>
+          <input class="form-input" type="email" id="f-email" data-ph-en="your@email.com" data-ph-zh="your@email.com" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><span class="en">WeChat ID <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></span><span class="zh">微信号 <span style="font-weight:400;color:#bbb">（选填）</span></span></label>
+          <input class="form-input" type="text" id="f-wechat" data-ph-en="WeChat ID" data-ph-zh="微信号" placeholder="WeChat ID">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Target institution <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></span><span class="zh">目标院校 <span style="font-weight:400;color:#bbb">（选填）</span></span></label>
+          <input class="form-input" type="text" id="f-institution" data-ph-en="e.g. UCL, University of Melbourne" data-ph-zh="例如：UCL、墨尔本大学" placeholder="e.g. UCL, University of Melbourne">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><span class="en">What do you need?</span><span class="zh">你需要什么？</span></label>
+        <div class="form-checks">
+          <input type="hidden" id="c9" value="Send me the service guide">
+          <input class="check-input" type="checkbox" id="c1" value="Personal Statement"><label class="check-label" for="c1"><span class="en">Personal Statement</span><span class="zh">个人陈述</span></label>
+          <input class="check-input" type="checkbox" id="c2" value="Reference Letters"><label class="check-label" for="c2"><span class="en">Reference Letters</span><span class="zh">推荐信</span></label>
+          <input class="check-input" type="checkbox" id="c3" value="Academic CV"><label class="check-label" for="c3"><span class="en">Academic CV</span><span class="zh">学术简历</span></label>
+          <input class="check-input" type="checkbox" id="c4" value="Motivation Letter"><label class="check-label" for="c4"><span class="en">Motivation Letter</span><span class="zh">动机信</span></label>
+          <input class="check-input" type="checkbox" id="c5" value="Research Proposal"><label class="check-label" for="c5"><span class="en">Research Proposal</span><span class="zh">研究计划</span></label>
+          <input class="check-input" type="checkbox" id="c6" value="Paper or Dissertation"><label class="check-label" for="c6"><span class="en">Paper / Dissertation</span><span class="zh">论文润色</span></label>
+          <input class="check-input" type="checkbox" id="c7" value="Tutoring"><label class="check-label" for="c7"><span class="en">Tutoring</span><span class="zh">英语辅导</span></label>
+          <input class="check-input" type="checkbox" id="c8" value="Mock Interview"><label class="check-label" for="c8"><span class="en">Mock Interview</span><span class="zh">模拟面试</span></label>
+          <input class="check-input" type="checkbox" id="c10" value="Other"><label class="check-label" for="c10"><span class="en">Other</span><span class="zh">其他</span></label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><span class="en">Briefly describe your situation <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></span><span class="zh">简要描述你的情况 <span style="font-weight:400;color:#bbb">（选填）</span></span></label>
+        <textarea class="form-textarea" id="f-message" placeholder="目前进展到哪个阶段？需要什么服务，时间安排如何？"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><span class="en">Attach a draft <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></span><span class="zh">上传初稿 <span style="font-weight:400;color:#bbb">（选填）</span></span></label>
+        <div class="form-upload" id="upload-zone">
+          <div class="form-upload-prompt" id="upload-prompt">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span><span class="en">Click or drag a file here</span><span class="zh">点击或拖拽文件到此处</span></span>
+            <small><span class="en">Word, PDF, or text — max 10 MB</span><span class="zh">Word、PDF 或文本，最大 10 MB</span></small>
+          </div>
+          <div class="file-list" id="file-list" style="display:none"></div>
+          <div class="form-upload-add" id="upload-add" style="display:none">
+            <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg>
+            <span class="en">Add another file</span><span class="zh">继续添加文件</span>
+          </div>
+        </div>
+        <input type="file" id="file-input" multiple accept=".doc,.docx,.pdf,.txt,.rtf" style="display:none">
+      </div>
+      <div style="display:flex;justify-content:center;"><button type="submit" class="btn btn-rose btn-submit"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span class="en">Send message</span><span class="zh">发送信息</span></button></div>
+    </form>
+
+    <div class="contact-channels">
+
+      <div class="channel-item wechat-channel">
+        <div class="channel-label"><span class="en">WeChat</span><span class="zh">微信</span></div>
+        <button class="channel-btn btn-wechat" id="wechat-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8.5 11.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm5 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M20.9 11.6C20.9 7.4 17 4 12.2 4S3.5 7.4 3.5 11.6c0 2.3 1.1 4.3 2.9 5.7l-.7 2.2 2.5-1.2c.9.3 1.9.4 2.9.4h.1c-.1-.3-.1-.7-.1-1C11.1 14 14.6 11 18.9 11c.7 0 1.4.1 2 .2zM22 17c0-2.8-2.7-5-6-5s-6 2.2-6 5 2.7 5 6 5c.8 0 1.5-.1 2.2-.4l2 1-.6-1.9C21 19.9 22 18.5 22 17zm-7.5-.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm3.5 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z"/></svg>
+          <span class="en">Add me on WeChat</span><span class="zh">添加微信</span>
+        </button>
+        <div class="qr-reveal" id="wechat-qr-reveal">
+          <div class="qr-card">
+            <div class="qr-card-bar wc"><span class="en">WeChat</span><span class="zh">微信</span></div>
+            <img src="wechat-qr.png" alt="WeChat QR" class="qr-box">
+          </div>
+        </div>
+      </div>
+
+      <div class="channel-item email-channel">
+        <div class="channel-label"><span class="en">Email</span><span class="zh">邮件</span></div>
+        <a href="/cdn-cgi/l/email-protection#61080f070e2118140f030e16040f1209144f020e0c" class="channel-btn btn-email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="en">Send email</span><span class="zh">发送邮件</span>
+        </a>
+      </div>
+
+      <div class="channel-item xhs-channel">
+        <div class="channel-label"><span class="en">RedNote</span><span class="zh">小红书</span></div>
+        <button class="channel-btn btn-xhs" id="xhs-btn">
+          <img src="https://cdn.simpleicons.org/xiaohongshu/ffffff" alt="" class="xhs-mark" loading="lazy">
+          <span class="en">Follow on RedNote</span><span class="zh">关注小红书</span>
+        </button>
+        <div class="qr-reveal" id="xhs-qr-reveal">
+          <div class="qr-card xhs">
+            <div class="qr-card-bar xhs"><span class="en">RedNote</span><span class="zh">小红书</span></div>
+            <img src="xhs-qr.png" alt="RedNote QR" class="qr-box">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">云博文书 · ACADEMIC WRITING · 2019–2026</span>
+    <div class="footer-links">
+      <a href="#services"><span class="en">Services</span><span class="zh">服务</span></a>
+      <a href="#packages"><span class="en">Packages</span><span class="zh">套餐</span></a>
+      <a href="#testimonials"><span class="en">Reviews</span><span class="zh">客户反馈</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact"><span class="en">Contact</span><span class="zh">联系</span></a>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#contact"><span class="en">Get in touch</span><span class="zh">联系我</span></a>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+(function(){
+  var cta=document.getElementById('sticky-cta');
+  var hero=document.querySelector('.hero');
+  var contact=document.getElementById('contact');
+  if(!cta||!hero||!contact)return;
+  function upd(){var hb=hero.getBoundingClientRect();var cb=contact.getBoundingClientRect();cta.classList.toggle('visible',hb.bottom<0&&cb.top>window.innerHeight);}
+  window.addEventListener('scroll',upd,{passive:true});upd();
+})();
+document.querySelectorAll('.lang-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var l=this.dataset.l;
+    document.documentElement.setAttribute('data-lang',l);
+    document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.l===l);});
+    document.querySelectorAll('[data-ph-en]').forEach(function(el){
+      el.placeholder = l==='zh' ? (el.dataset.phZh||el.dataset.phEn) : el.dataset.phEn;
+    });
+  });
+});
+function toggleSvc(header){
+  var item=header.parentElement;
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.svc-item.open').forEach(function(i){i.classList.remove('open');});
+  if(!isOpen)item.classList.add('open');
+}
+function toggleFaq(q){
+  var item=q.parentElement;
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+  if(!isOpen)item.classList.add('open');
+}
+function toggleTerms(btn){
+  btn.classList.toggle('open');
+  var body=btn.nextElementSibling;
+  if(body)body.classList.toggle('open');
+}
+(function(){
+  var slider=document.getElementById('ba-slider');
+  var handle=document.getElementById('ba-handle');
+  if(!slider||!handle)return;
+  function updateSlider(val){
+    var activePane=document.querySelector('.ba-pane.active');
+    if(!activePane)return;
+    var before=activePane.querySelector('.ba-before');
+    if(before)before.style.width=val+'%';
+    handle.style.left=val+'%';
+  }
+  slider.addEventListener('input',function(){updateSlider(this.value);});
+  document.querySelectorAll('.ba-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var paneId=this.dataset.pane;
+      document.querySelectorAll('.ba-tab').forEach(function(t){t.classList.remove('active');});
+      document.querySelectorAll('.ba-pane').forEach(function(p){p.classList.remove('active');});
+      this.classList.add('active');
+      var pane=document.getElementById(paneId);
+      if(pane){pane.classList.add('active');slider.value=50;updateSlider(50);}
+    });
+  });
+  updateSlider(50);
+})();
+// File upload UI
+(function(){
+  var zone    = document.getElementById('upload-zone');
+  var input   = document.getElementById('file-input');
+  var list    = document.getElementById('file-list');
+  var prompt  = document.getElementById('upload-prompt');
+  var addMore = document.getElementById('upload-add');
+  var files   = [];
+
+  function renderFiles(){
+    list.innerHTML = '';
+    if(files.length === 0){
+      list.style.display = 'none'; prompt.style.display = 'flex'; addMore.style.display = 'none'; return;
+    }
+    list.style.display = 'flex'; prompt.style.display = 'none'; addMore.style.display = 'flex';
+    files.forEach(function(f, i){
+      var item = document.createElement('div');
+      item.className = 'file-item';
+      item.innerHTML = '<div class="file-item-name"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>' + f.name + '</span></div><button class="file-remove" type="button" data-i="'+i+'">✕</button>';
+      list.appendChild(item);
+    });
+    list.querySelectorAll('.file-remove').forEach(function(btn){
+      btn.addEventListener('click', function(){ files.splice(parseInt(this.dataset.i),1); renderFiles(); });
+    });
+  }
+
+  function addFiles(newFiles){
+    Array.from(newFiles).forEach(function(f){
+      if(f.size > 10*1024*1024){ alert(f.name + ' exceeds 10 MB limit'); return; }
+      files.push(f);
+    });
+    renderFiles();
+  }
+
+  zone.addEventListener('click', function(e){
+    if(e.target.closest('.file-remove')) return;
+    input.click();
+  });
+  input.addEventListener('change', function(){ addFiles(this.files); this.value=''; });
+  addMore.addEventListener('click', function(e){ e.stopPropagation(); input.click(); });
+  zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', function(){ zone.classList.remove('drag-over'); });
+  zone.addEventListener('drop', function(e){ e.preventDefault(); zone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+
+  window._getUploadedFiles = function(){ return files; };
+})();
+
+// Contact form submit via EmailJS
+(function(){
+  var form = document.getElementById('contact-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = form.querySelector('button[type=submit]');
+    btn.innerHTML = '<span class="en">Sending…</span><span class="zh">发送中…</span>';
+    btn.disabled = true;
+
+    var name        = document.getElementById('f-name').value.trim();
+    var email       = document.getElementById('f-email').value.trim();
+    var wechat      = document.getElementById('f-wechat').value.trim();
+    var institution = document.getElementById('f-institution').value.trim();
+    var message     = document.getElementById('f-message').value.trim();
+    var checkedServices = Array.from(form.querySelectorAll('.check-input:checked')).map(function(c){ return c.value; });
+    var services = ['Send me the service guide'].concat(checkedServices).join(', ');
+    var files       = window._getUploadedFiles ? window._getUploadedFiles() : [];
+    var fileNames   = files.length ? files.map(function(f){ return f.name; }).join(', ') : 'None';
+
+    // Template params sent to YOU (fill in your EmailJS template variables to match these keys)
+    var paramsToYou = {
+      client_name:        name,
+      client_email:       email,
+      client_wechat:      wechat || 'Not provided',
+      client_institution: institution || 'Not specified',
+      client_services:    services,
+      client_message:     message || 'No message provided',
+      file_names:         fileNames
+    };
+
+    // Auto-reply params sent to CLIENT
+    // EmailJS template for acknowledgement should use: {{to_name}}, {{to_email}}, {{services}}
+    var paramsToClient = {
+      to_name:   name,
+      to_email:  email,
+      services:  services
+    };
+
+    // Send both emails — first to you, then auto-reply to client
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_YOU, paramsToYou)
+    .then(function(){
+      return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ACK, paramsToClient);
+    })
+    .then(function(){
+      btn.innerHTML = '<span class="en">Sent ✓</span><span class="zh">已发送 ✓</span>';
+      form.reset();
+      document.getElementById('file-list').style.display = 'none';
+      document.getElementById('upload-prompt').style.display = 'flex';
+      document.getElementById('upload-add').style.display = 'none';
+      if(window._getUploadedFiles) window._uploadedFiles = [];
+    })
+    .catch(function(err){
+      console.error('EmailJS error:', err);
+      btn.innerHTML = '<span class="en">Error — try email</span><span class="zh">发送失败</span>';
+      btn.disabled = false;
+    });
+  });
+})();
+(function(){
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // WeChat button
+  var wcBtn = document.getElementById('wechat-btn');
+  var wcReveal = document.getElementById('wechat-qr-reveal');
+  if(wcBtn && wcReveal){
+    if(isMobile){
+      wcBtn.addEventListener('click', function(){
+        window.location.href='weixin://dl/chat?sjoerdess';
+        setTimeout(function(){ window.open('https://weixin.qq.com/','_blank'); }, 1500);
+      });
+    } else {
+      wcBtn.addEventListener('click', function(){
+        wcReveal.classList.toggle('open');
+      });
+    }
+  }
+  // XHS button
+  var xhsBtn = document.getElementById('xhs-btn');
+  var xhsReveal = document.getElementById('xhs-qr-reveal');
+  if(xhsBtn){
+    if(isMobile){
+      xhsBtn.addEventListener('click', function(){
+        var webUrl = 'https://www.xiaohongshu.com/user/profile/Sjoerd_NL';
+        var isAndroid = /Android/i.test(navigator.userAgent);
+        var appUrl = isAndroid ? 'xhsdiscovery://home' : 'xhsdiscover://home';
+        var appOpened = false;
+        function onHide(){ appOpened = true; }
+        document.addEventListener('visibilitychange', onHide, { once: true });
+        var fallback = setTimeout(function(){
+          document.removeEventListener('visibilitychange', onHide);
+          if(!appOpened){ window.open(webUrl, '_blank'); }
+        }, 1500);
+        setTimeout(function(){ if(appOpened){ clearTimeout(fallback); } }, 1600);
+        window.location.href = appUrl;
+      });
+    } else {
+      if(xhsReveal){
+        xhsBtn.addEventListener('click', function(){
+          xhsReveal.classList.toggle('open');
+        });
+      }
+    }
+  }
+})();
+// Testimonial carousel
+(function(){
+  var track   = document.getElementById('testi-track');
+  var prev    = document.getElementById('testi-prev');
+  var next    = document.getElementById('testi-next');
+  var dotsEl  = document.getElementById('testi-dots');
+  var counter = document.getElementById('testi-counter');
+  if(!track) return;
+  var cards   = track.querySelectorAll('.testi-card');
+  var total   = cards.length;
+  var current = 0;
+  var startX  = 0;
+  var dragging = false;
+
+  var dots = [];
+  for(var i=0; i<total; i++){
+    var d = document.createElement('button');
+    d.className = 'carousel-dot' + (i===0?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.dataset.i = i;
+    d.addEventListener('click',function(){ goTo(parseInt(this.dataset.i)); });
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+
+  function goTo(idx){
+    current = (idx+total)%total;
+    track.style.transform = 'translateX(-'+(current*100)+'%)';
+    dots.forEach(function(d,i){ d.classList.toggle('active',i===current); });
+    counter.textContent = (current+1)+' / '+total;
+  }
+
+  prev.addEventListener('click',function(){ goTo(current-1); });
+  next.addEventListener('click',function(){ goTo(current+1); });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft') goTo(current-1);
+    if(e.key==='ArrowRight') goTo(current+1);
+  });
+
+  track.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; dragging=true; },{passive:true});
+  track.addEventListener('touchend',function(e){
+    if(!dragging) return;
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>40){ goTo(dx<0?current+1:current-1); }
+    dragging=false;
+  },{passive:true});
+  track.addEventListener('mousedown',function(e){ startX=e.clientX; dragging=true; track.style.cursor='grabbing'; });
+  window.addEventListener('mouseup',function(e){
+    if(!dragging) return;
+    var dx=e.clientX-startX;
+    if(Math.abs(dx)>40){ goTo(dx<0?current+1:current-1); }
+    dragging=false; track.style.cursor='';
+  });
+
+  goTo(0);
+})();
+function uniLogoFail(img){
+  var d=document.createElement('div');
+  d.className='uni-mono';
+  d.style.background=img.getAttribute('data-fb-bg')||'#333';
+  d.textContent=img.getAttribute('data-fb-text')||'?';
+  img.parentNode.replaceChild(d,img);
+}
+function avatarFail(img){
+  var d=img.parentElement;
+  d.removeChild(img);
+  d.textContent=img.getAttribute('data-fb-char')||'?';
+  d.style.background='linear-gradient(135deg,#8C5A6E,#6B52A0)';
+  d.style.display='flex';
+  d.style.alignItems='center';
+  d.style.justifyContent='center';
+}
+
+(function(){
+  var track=document.getElementById('acc-track'),prev=document.getElementById('acc-prev'),next=document.getElementById('acc-next'),dotsEl=document.getElementById('acc-dots'),counter=document.getElementById('acc-counter');
+  if(!track) return;
+  var cards=track.querySelectorAll('.letter-card'),total=cards.length,current=0,startX=0,dragging=false,dots=[];
+  function buildDots(){
+    dotsEl.innerHTML=''; dots=[];
+    for(var i=0;i<total;i++){
+      var d=document.createElement('button');
+      d.className='carousel-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','Slide '+(i+1));
+      d.dataset.i=i;
+      d.addEventListener('click',function(){ goTo(parseInt(this.dataset.i)); });
+      dotsEl.appendChild(d); dots.push(d);
+    }
+  }
+  function goTo(idx){
+    current=(idx+total)%total;
+    track.style.transform='translateX(-'+(current*100)+'%)';
+    dots.forEach(function(d,i){ d.classList.toggle('active',i===current); });
+    counter.textContent=(current+1)+' / '+total;
+  }
+  buildDots();
+  prev.addEventListener('click',function(){ goTo(current-1); });
+  next.addEventListener('click',function(){ goTo(current+1); });
+  track.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; dragging=true; },{passive:true});
+  track.addEventListener('touchend',function(e){
+    if(!dragging) return;
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>40){ goTo(dx<0?current+1:current-1); }
+    dragging=false;
+  },{passive:true});
+  track.addEventListener('mousedown',function(e){ startX=e.clientX; dragging=true; track.style.cursor='grabbing'; });
+  window.addEventListener('mouseup',function(e){
+    if(!dragging) return;
+    var dx=e.clientX-startX;
+    if(Math.abs(dx)>40){ goTo(dx<0?current+1:current-1); }
+    dragging=false; track.style.cursor='';
+  });
+  goTo(0);
+})();
+
+// ── Mouse-following glow on gradient CTAs (desktop only) ─────────────
+if(window.matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.btn-rose, .nav-cta').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){
+      var r=btn.getBoundingClientRect();
+      btn.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      btn.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+    btn.addEventListener('mouseleave',function(){
+      btn.style.removeProperty('--mx');
+      btn.style.removeProperty('--my');
+    });
+  });
+}
+
+function toggleOrig(btn){
+  var card = btn.closest('.testi-card');
+  card.classList.toggle('show-orig');
+  btn.textContent = card.classList.contains('show-orig') ? btn.dataset.hide : btn.dataset.show;
+}
+</script>
+</body>
+</html>
