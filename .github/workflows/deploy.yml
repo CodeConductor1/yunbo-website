@@ -15,7 +15,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 2185053d26bd9762c21e408dda45
+          accountId: 2185053d26bd9762c21e408dda452cf7
           projectName: yunbo
           directory: .
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
