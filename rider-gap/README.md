@@ -99,14 +99,51 @@ npx expo start          # open as Rider A, simulation on
 Rider B starts 250 m up the road and rides faster, so the gap opens steadily —
 enough to watch the number, the direction, and the closing rate all update.
 
-## Changing the route
+## The route
 
-Everything route-specific lives in `src/route.ts`. Replace the `ROUTE` array
-with your own ordered `{ lat, lng }` points and change `ROUTE_ID` so old rows
-don't mix with new ones. Nothing else needs to change — lengths, progress and
-the track UI all derive from that array.
+The bundled route runs **Deventer → Zwolle**, following the IJssel north through
+Olst, Wijhe, Herxen and Windesheim — roughly the N337 dike road riders use
+between the two cities.
 
-The bundled route approximates the Central Park loop (~9.9 km, counter-clockwise).
+It is built from six *waypoints*, not a traced road. Each coordinate is the real
+position of that town, but the app joins them with straight lines, so the course
+cuts every bend the river makes: it measures **29.0 km** against roughly 32 km on
+the ground. `OFF_ROUTE_THRESHOLD_M` is therefore widened to 2000 m, because a
+rider on the actual road can be more than a kilometre from the straight line
+between two towns.
+
+**Before riding it for real, import an accurate trace.** Export the route as GPX
+from any planner (Komoot, Strava, RideWithGPS, BRouter) and run:
+
+```bash
+npm run import-gpx -- ~/Downloads/deventer-zwolle.gpx --name "Deventer to Zwolle"
+npm run verify
+```
+
+That rewrites `src/route.ts` with the real geometry and restores the 75 m
+off-route threshold, at which point progress and the gap are trustworthy.
+
+| Flag | Default | Meaning |
+| --- | --- | --- |
+| `--name` | GPX `<name>`, else filename | Display name |
+| `--id` | slug of the name | `ROUTE_ID`; change it so old rows don't mix in |
+| `--epsilon` | `25` | Simplification tolerance in metres |
+| `--threshold` | `75` | Off-route distance in metres |
+| `--out` | `src/route.ts` | Where to write |
+
+GPX traces carry a point every few metres. The importer thins them with
+Ramer–Douglas–Peucker, dropping only points that sit within `--epsilon` of the
+line their neighbours already describe. On a test trace that cut 1931 points to
+64 — a 30× reduction — while losing 96 m of a 32.4 km course (0.3%).
+
+To use a different route entirely, import a different GPX, or hand-edit `ROUTE`
+in `src/route.ts`. Everything else — length, progress, the track UI — derives
+from that array.
+
+Waypoint sources: [Deventer](https://en.wikipedia.org/wiki/Deventer_railway_station)
+and [Zwolle](https://en.wikipedia.org/wiki/Zwolle_railway_station) stations,
+[Olst](https://en.wikipedia.org/wiki/Olst), [Wijhe](https://en.wikipedia.org/wiki/Wijhe),
+[Herxen](https://mapcarta.com/17854310), [Windesheim](https://mapcarta.com/17834400).
 
 ## Verifying the math
 
@@ -117,20 +154,28 @@ npm run typecheck
 
 The geometry is the part worth testing: if progress along the course is wrong,
 every gap the app reports is wrong. `npm run verify` checks haversine against a
-known distance, route length against the real loop, monotonic progress along
-the course, midpoint projection, off-route detection, and gap arithmetic. It also
-covers the simulator: that `distance -> point -> distance` round-trips, that a
-simulated rider covers exactly speed x time, and that its jitter stays on the
-route.
+known distance, route length against the real journey, monotonic progress along
+the course, midpoint projection, off-route detection, and gap arithmetic.
+
+It also covers the cases the shipped route can't exercise itself. Deventer →
+Zwolle never doubles back, so snap tie-breaking is checked against synthetic
+courses — a closed loop and an out-and-back — where each position genuinely sits
+on two parts of the course at once. And for the simulator: that
+`distance -> point -> distance` round-trips, that a simulated rider covers
+exactly speed × time, and that its jitter does not distort progress.
 
 ## Known limits
 
-- **One lap.** The route is treated as a course from start to finish. A rider
-  starting a second lap reads as being back at 0 m. Multi-lap tracking needs a
-  lap counter on top of progress.
-- **Loop ambiguity at the start line.** Start and finish overlap, so a fix
-  there is genuinely ambiguous. The app uses the rider's previous position to
-  decide; with no history (a cold launch) it assumes the start.
+- **The bundled route is approximate.** Six waypoints joined by straight lines,
+  ~3 km short of the real ride. Import a GPX before trusting the numbers — see
+  [The route](#the-route).
+- **One lap.** The route is treated as a course from start to finish. On a
+  circular route, a rider starting a second lap reads as being back at 0 m.
+  Multi-lap tracking needs a lap counter on top of progress.
+- **Ambiguity where a course meets itself.** On a loop or an out-and-back, a
+  position fits two parts of the course equally well. The app uses the rider's
+  previous position to decide; with no history (a cold launch) it assumes the
+  earlier one.
 - **Foreground only.** Location stops when the app is backgrounded. Continuous
   tracking needs `expo-task-manager` and background location permissions.
 - **Demo-grade security.** There is no auth: the anon key reads and writes
@@ -144,11 +189,13 @@ route.
 ```
 App.tsx                     rider picker, then the gap screen
 src/geo.ts                  haversine + point-to-segment projection
-src/route.ts                the hardcoded route and progress-along-it
+src/course.ts               generic polyline progress maths
+src/route.ts                the hardcoded route, built on a course
 src/simulation.ts           virtual riders, shared by both simulators
 src/useRiderGap.ts          GPS watch, publishing, realtime, gap derivation
 src/components/             gap screen, rider cards, route track
 supabase/schema.sql         table, realtime publication, RLS policies
+scripts/import-gpx.ts       turns a GPX trace into src/route.ts
 scripts/simulate-rider.ts   bot that publishes a second rider
 scripts/verify-route.ts     geometry and simulation checks
 ```
