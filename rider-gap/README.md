@@ -51,12 +51,53 @@ Run it:
 npx expo start
 ```
 
-Open it on **two physical devices** — GPS is the input, so simulators won't
-produce movement. On each device pick a *different* rider. Both should show
-`Live` once realtime connects.
+Open it on **two physical devices** and pick a *different* rider on each. Both
+should show `Live` once realtime connects.
+
+No second device? See [Testing without two devices](#testing-without-two-devices).
 
 > Changing `.env` requires `npx expo start -c` to clear the bundler cache;
 > `EXPO_PUBLIC_` values are inlined at build time.
+
+## Testing without two devices
+
+Two simulators, usable together or apart. Both are driven by the same motion
+model in `src/simulation.ts`, so a simulated rider behaves like a real one all
+the way through: snapped to the route, published to Supabase, subscribed to
+over realtime.
+
+**The other rider** — a bot that publishes a second rider straight to Supabase:
+
+```bash
+npm run simulate                       # rider-b, from 250 m, at 8 m/s
+npm run simulate -- --rider rider-b --start 250 --speed 8 --loop
+```
+
+| Flag | Default | Meaning |
+| --- | --- | --- |
+| `--rider` | `rider-b` | Which rider id to publish as |
+| `--start` | `250` | Where on the route it starts, in metres |
+| `--speed` | `8` | Metres per second (8 m/s ≈ 29 km/h) |
+| `--loop` | off | Wrap to the start instead of stopping at the finish |
+
+It reads the same `.env` as the app. Ctrl-C to stop — the last position stays
+in the table and shows as stale in the app after ~15 s. Run it as the rider you
+are *not* using on your phone.
+
+**Your own position** — flip **Simulate my position** on the rider picker. Your
+device rolls along the route without touching the GPS, so this works on a
+simulator or at a desk. The gap screen shows a `SIMULATED` badge whenever it is
+on, so simulated data is never mistaken for a real ride.
+
+Running both together gives a full live gap with no phones at all:
+
+```bash
+npm run simulate -- --rider rider-b --start 250 --speed 8
+npx expo start          # open as Rider A, simulation on
+```
+
+Rider B starts 250 m up the road and rides faster, so the gap opens steadily —
+enough to watch the number, the direction, and the closing rate all update.
 
 ## Changing the route
 
@@ -70,14 +111,17 @@ The bundled route approximates the Central Park loop (~9.9 km, counter-clockwise
 ## Verifying the math
 
 ```bash
-npm run verify   # route geometry checks, no device or network needed
+npm run verify   # geometry + simulation checks, no device or network needed
 npm run typecheck
 ```
 
 The geometry is the part worth testing: if progress along the course is wrong,
 every gap the app reports is wrong. `npm run verify` checks haversine against a
 known distance, route length against the real loop, monotonic progress along
-the course, midpoint projection, off-route detection, and gap arithmetic.
+the course, midpoint projection, off-route detection, and gap arithmetic. It also
+covers the simulator: that `distance -> point -> distance` round-trips, that a
+simulated rider covers exactly speed x time, and that its jitter stays on the
+route.
 
 ## Known limits
 
@@ -101,8 +145,10 @@ the course, midpoint projection, off-route detection, and gap arithmetic.
 App.tsx                     rider picker, then the gap screen
 src/geo.ts                  haversine + point-to-segment projection
 src/route.ts                the hardcoded route and progress-along-it
+src/simulation.ts           virtual riders, shared by both simulators
 src/useRiderGap.ts          GPS watch, publishing, realtime, gap derivation
 src/components/             gap screen, rider cards, route track
 supabase/schema.sql         table, realtime publication, RLS policies
-scripts/verify-route.ts     geometry checks
+scripts/simulate-rider.ts   bot that publishes a second rider
+scripts/verify-route.ts     geometry and simulation checks
 ```

@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { GapScreen } from './src/components/GapScreen';
@@ -13,12 +20,17 @@ import { RIDERS, type Rider } from './src/riders';
  */
 export default function App() {
   const [me, setMe] = useState<Rider | null>(null);
+  const [simulate, setSimulate] = useState(false);
 
   if (me) {
     return (
       <>
         <StatusBar style="light" />
-        <GapScreen me={me} onChangeRider={() => setMe(null)} />
+        <GapScreen
+          me={me}
+          simulate={simulate}
+          onChangeRider={() => setMe(null)}
+        />
       </>
     );
   }
@@ -34,6 +46,22 @@ export default function App() {
         <Text style={styles.prompt}>
           Pick this device's rider. Use a different one on the other device.
         </Text>
+
+        <View style={styles.simulateRow}>
+          <View style={styles.simulateText}>
+            <Text style={styles.simulateLabel}>Simulate my position</Text>
+            <Text style={styles.simulateHint}>
+              Roll along the route without GPS, for testing indoors. Pair it
+              with `npm run simulate` to move the other rider too.
+            </Text>
+          </View>
+          <Switch
+            value={simulate}
+            onValueChange={setSimulate}
+            trackColor={{ false: '#1E2A38', true: '#2A6F8A' }}
+            thumbColor={simulate ? '#4CC9F0' : '#5C6B7A'}
+          />
+        </View>
 
         {RIDERS.map((rider) => (
           <Pressable
@@ -66,6 +94,19 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   pressed: { opacity: 0.6 },
+  simulateRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 24,
+  },
+  simulateText: { flex: 1, paddingRight: 16 },
+  simulateLabel: { color: '#F2F6FA', fontSize: 15, fontWeight: '600' },
+  simulateHint: {
+    color: '#5C6B7A',
+    fontSize: 12,
+    marginTop: 4,
+    lineHeight: 17,
+  },
   dot: { width: 12, height: 12, borderRadius: 6, marginRight: 12 },
   optionText: { color: '#F2F6FA', fontSize: 17, fontWeight: '600' },
 });

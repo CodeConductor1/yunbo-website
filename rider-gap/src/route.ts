@@ -148,3 +148,28 @@ export function progressAlongRoute(
     isOffRoute: chosen.offRouteM > OFF_ROUTE_THRESHOLD_M,
   };
 }
+
+/**
+ * The inverse of `progressAlongRoute`: the coordinate a given distance along
+ * the course. Used to drive simulated riders, and to place anything that is
+ * described by how far along it sits rather than by lat/lng.
+ *
+ * Interpolates linearly in lat/lng, which at segment scale is indistinguishable
+ * from interpolating along the great circle.
+ */
+export function pointAtDistance(distanceM: number): LatLng {
+  const clamped = Math.max(0, Math.min(ROUTE_LENGTH_M, distanceM));
+
+  let i = 0;
+  while (i < ROUTE.length - 2 && CUMULATIVE_M[i + 1]! < clamped) i += 1;
+
+  const a = ROUTE[i]!;
+  const b = ROUTE[i + 1]!;
+  const segmentLengthM = CUMULATIVE_M[i + 1]! - CUMULATIVE_M[i]!;
+  const t = segmentLengthM === 0 ? 0 : (clamped - CUMULATIVE_M[i]!) / segmentLengthM;
+
+  return {
+    lat: a.lat + (b.lat - a.lat) * t,
+    lng: a.lng + (b.lng - a.lng) * t,
+  };
+}

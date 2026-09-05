@@ -4,6 +4,7 @@ import type { RealtimeChannel } from '@supabase/supabase-js';
 
 import type { LatLng } from './geo';
 import { progressAlongRoute, ROUTE_ID, type RouteProgress } from './route';
+import { createSimulatedRider } from './simulation';
 import { supabase, type RiderPositionRow } from './supabase';
 
 /** A rider is treated as stale - and the gap untrustworthy - past this age. */
@@ -26,6 +27,21 @@ export type RiderState = {
 };
 
 export type ConnectionStatus = 'connecting' | 'live' | 'error';
+
+export type RiderGapOptions = {
+  /**
+   * Drive this device's position from a virtual rider instead of the GPS, for
+   * testing indoors or on a simulator. Everything downstream - publishing,
+   * realtime, the gap - behaves exactly as it does with a real fix.
+   */
+  simulate?: boolean;
+  /** Where the simulated rider starts, in metres along the route. */
+  simulateStartDistanceM?: number;
+  simulateSpeedMps?: number;
+};
+
+/** How often the simulated rider produces a fix. */
+const SIMULATION_TICK_MS = 1_000;
 
 export type RiderGap = {
   me: RiderState | null;
@@ -62,7 +78,16 @@ function rowToRiderState(
  * Tracks this device's position, publishes it, and follows the other rider
  * over Supabase realtime. Both devices run this with their ids swapped.
  */
-export function useRiderGap(myRiderId: string): RiderGap {
+export function useRiderGap(
+  myRiderId: string,
+  options: RiderGapOptions = {},
+): RiderGap {
+  const {
+    simulate = false,
+    simulateStartDistanceM = 0,
+    simulateSpeedMps,
+  } = options;
+
   const [me, setMe] = useState<RiderState | null>(null);
   const [them, setThem] = useState<RiderState | null>(null);
   const [closingRateMps, setClosingRateMps] = useState<number | null>(null);
@@ -86,8 +111,74 @@ export function useRiderGap(myRiderId: string): RiderGap {
     [myRiderId],
   );
 
-  // --- Publish our own position -------------------------------------------
+  /**
+   * Single path for a new position, whatever produced it: snap to the route,
+   * update local state, and publish (rate-limited) for the other rider.
+   */
+  const publishFix = useCallback(
+    (point: LatLng, speedMps: number | null, accuracyM: number | null) => {
+      const progress = progressAlongRoute(point, myProgressRef.current);
+      myProgressRef.current = progress.distanceM;
+
+      setMe({
+        riderId: myRiderId,
+        point,
+        progress,
+        speedMps,
+        accuracyM,
+        updatedAt: Date.now(),
+      });
+
+      const now = Date.now();
+      if (now - lastPublishAtRef.current < MIN_PUBLISH_INTERVAL_MS) return;
+      lastPublishAtRef.current = now;
+
+      void supabase
+        .from('rider_positions')
+        .upsert(
+          {
+            rider_id: myRiderId,
+            route_id: ROUTE_ID,
+            lat: point.lat,
+            lng: point.lng,
+            accuracy_m: accuracyM,
+            speed_mps: speedMps,
+            updated_at: new Date(now).toISOString(),
+          },
+          { onConflict: 'rider_id' },
+        )
+        .then(({ error }) => {
+          // A failed write is not fatal - the next fix retries in ~2s - but
+          // surface it so a misconfigured project is obvious.
+          if (error) setErrorMessage(`Could not publish position: ${error.message}`);
+          else setErrorMessage(null);
+        });
+    },
+    [myRiderId],
+  );
+
+  // --- Produce our own position -------------------------------------------
   useEffect(() => {
+    // Simulated: a virtual rider rolls along the route on a timer. No GPS and
+    // no location permission involved.
+    if (simulate) {
+      const rider = createSimulatedRider({
+        startDistanceM: simulateStartDistanceM,
+        ...(simulateSpeedMps === undefined ? {} : { speedMps: simulateSpeedMps }),
+      });
+      const startedAt = Date.now();
+
+      const tick = () => {
+        const fix = rider.fixAt(Date.now() - startedAt);
+        publishFix(fix.point, fix.speedMps, fix.accuracyM);
+      };
+
+      tick(); // Place the rider immediately rather than after the first tick.
+      const timer = setInterval(tick, SIMULATION_TICK_MS);
+      return () => clearInterval(timer);
+    }
+
+    // Real: watch the device GPS.
     let subscription: Location.LocationSubscription | null = null;
     let cancelled = false;
 
@@ -110,43 +201,11 @@ export function useRiderGap(myRiderId: string): RiderGap {
           distanceInterval: 5,
         },
         (fix) => {
-          const point = { lat: fix.coords.latitude, lng: fix.coords.longitude };
-          const progress = progressAlongRoute(point, myProgressRef.current);
-          myProgressRef.current = progress.distanceM;
-
-          setMe({
-            riderId: myRiderId,
-            point,
-            progress,
-            speedMps: fix.coords.speed,
-            accuracyM: fix.coords.accuracy,
-            updatedAt: Date.now(),
-          });
-
-          const now = Date.now();
-          if (now - lastPublishAtRef.current < MIN_PUBLISH_INTERVAL_MS) return;
-          lastPublishAtRef.current = now;
-
-          void supabase
-            .from('rider_positions')
-            .upsert(
-              {
-                rider_id: myRiderId,
-                route_id: ROUTE_ID,
-                lat: point.lat,
-                lng: point.lng,
-                accuracy_m: fix.coords.accuracy,
-                speed_mps: fix.coords.speed,
-                updated_at: new Date(now).toISOString(),
-              },
-              { onConflict: 'rider_id' },
-            )
-            .then(({ error }) => {
-              // A failed write is not fatal - the next fix retries in ~2s -
-              // but surface it so a misconfigured project is obvious.
-              if (error) setErrorMessage(`Could not publish position: ${error.message}`);
-              else setErrorMessage(null);
-            });
+          publishFix(
+            { lat: fix.coords.latitude, lng: fix.coords.longitude },
+            fix.coords.speed,
+            fix.coords.accuracy,
+          );
         },
       );
     })().catch((err: unknown) => {
@@ -159,7 +218,7 @@ export function useRiderGap(myRiderId: string): RiderGap {
       cancelled = true;
       subscription?.remove();
     };
-  }, [myRiderId]);
+  }, [simulate, simulateStartDistanceM, simulateSpeedMps, publishFix]);
 
   // --- Follow the other rider ---------------------------------------------
   useEffect(() => {

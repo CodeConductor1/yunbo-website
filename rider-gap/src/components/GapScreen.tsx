@@ -23,13 +23,15 @@ const CONNECTION_TEXT = {
 
 export function GapScreen({
   me: myRider,
+  simulate = false,
   onChangeRider,
 }: {
   me: Rider;
+  simulate?: boolean;
   onChangeRider: () => void;
 }) {
   const { me, them, gapM, isAhead, closingRateMps, connection, errorMessage } =
-    useRiderGap(myRider.id);
+    useRiderGap(myRider.id, { simulate });
   const theirRider = otherRider(myRider.id);
 
   // Drives the "Xs ago" readouts, which must keep counting up between fixes.
@@ -64,6 +66,11 @@ export function GapScreen({
             ]}
           />
           <Text style={styles.statusText}>{CONNECTION_TEXT[connection]}</Text>
+          {simulate ? (
+            <View style={styles.simBadge}>
+              <Text style={styles.simBadgeText}>SIMULATED</Text>
+            </View>
+          ) : null}
         </View>
 
         {!isSupabaseConfigured ? (
@@ -158,6 +165,19 @@ const styles = StyleSheet.create({
   statusLive: { backgroundColor: '#4ADE80' },
   statusDown: { backgroundColor: '#F76C6C' },
   statusText: { color: '#9FB0C0', fontSize: 12 },
+  simBadge: {
+    marginLeft: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+    backgroundColor: '#2A6F8A',
+  },
+  simBadgeText: {
+    color: '#DCF3FB',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+  },
   error: { color: '#F76C6C', fontSize: 12, marginTop: 12, lineHeight: 17 },
   gapBlock: { alignItems: 'center', marginVertical: 32 },
   gapLabel: { color: '#5C6B7A', fontSize: 12, letterSpacing: 2 },

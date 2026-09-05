@@ -4,7 +4,13 @@
  * network needed. Run with `npm run verify`.
  */
 import { haversineMeters } from '../src/geo';
-import { ROUTE, ROUTE_LENGTH_M, progressAlongRoute } from '../src/route';
+import {
+  ROUTE,
+  ROUTE_LENGTH_M,
+  pointAtDistance,
+  progressAlongRoute,
+} from '../src/route';
+import { createSimulatedRider } from '../src/simulation';
 
 let failures = 0;
 
@@ -99,6 +105,75 @@ check(
   'the gap equals the summed segments between two riders',
   Math.abs(ahead.distanceM - behind.distanceM - summed) < 2,
   `${(ahead.distanceM - behind.distanceM).toFixed(0)} m vs ${summed.toFixed(0)} m`,
+);
+
+
+// `pointAtDistance` must invert `progressAlongRoute`: turning a distance into a
+// coordinate and back should land where it started. This is what simulated
+// riders are built on, so drift here would fake a gap that isn't real.
+let worstRoundTripM = 0;
+for (let fraction = 0; fraction <= 1.0001; fraction += 0.05) {
+  const target = ROUTE_LENGTH_M * Math.min(1, fraction);
+  const returned = progressAlongRoute(pointAtDistance(target), target).distanceM;
+  worstRoundTripM = Math.max(worstRoundTripM, Math.abs(returned - target));
+}
+check(
+  'distance -> point -> distance round-trips',
+  worstRoundTripM < 1,
+  `worst drift ${worstRoundTripM.toFixed(3)} m`,
+);
+
+check(
+  'pointAtDistance clamps beyond the route',
+  progressAlongRoute(pointAtDistance(ROUTE_LENGTH_M * 2), ROUTE_LENGTH_M)
+    .distanceM > ROUTE_LENGTH_M - 1,
+  'past the finish clamps to the finish',
+);
+
+// A simulated rider must cover exactly speed x time.
+const moving = createSimulatedRider({
+  startDistanceM: 100,
+  speedMps: 8,
+  jitterM: 0,
+});
+const after60s = moving.fixAt(60_000);
+check(
+  'a simulated rider covers speed x time',
+  Math.abs(after60s.distanceM - (100 + 8 * 60)) < 0.5,
+  `${after60s.distanceM.toFixed(1)} m after 60 s`,
+);
+
+// Jitter should perturb the fix without throwing it off the route.
+const jittery = createSimulatedRider({ speedMps: 8, jitterM: 4 });
+let worstJitterOffRoute = 0;
+for (let tick = 0; tick < 60; tick += 1) {
+  const fix = jittery.fixAt(tick * 1000);
+  const snapped = progressAlongRoute(fix.point, fix.distanceM);
+  worstJitterOffRoute = Math.max(worstJitterOffRoute, snapped.offRouteM);
+}
+check(
+  'simulated jitter stays on the route',
+  worstJitterOffRoute < 10,
+  `worst off-route ${worstJitterOffRoute.toFixed(1)} m`,
+);
+
+// Without --loop the rider stops at the finish; with it, it wraps around.
+const oneLap = createSimulatedRider({ speedMps: 1000, jitterM: 0 });
+const stopped = oneLap.fixAt(60_000);
+check(
+  'a non-looping rider stops at the finish',
+  stopped.finished &&
+    Math.abs(stopped.distanceM - ROUTE_LENGTH_M) < 0.5 &&
+    stopped.speedMps === 0,
+  `${stopped.distanceM.toFixed(0)} m of ${ROUTE_LENGTH_M.toFixed(0)} m`,
+);
+
+const looping = createSimulatedRider({ speedMps: 1000, jitterM: 0, loop: true });
+const wrapped = looping.fixAt(60_000);
+check(
+  'a looping rider wraps past the finish',
+  !wrapped.finished && wrapped.distanceM < ROUTE_LENGTH_M,
+  `${wrapped.distanceM.toFixed(0)} m into the next lap`,
 );
 
 console.log(
